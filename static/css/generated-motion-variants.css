@@ -1,0 +1,438 @@
+/* Generated-motion preview layouts */
+.motion-preview-banner {
+  max-width: 1180px;
+  margin: 0 auto 2.2rem;
+  padding: 0.95rem 1.1rem;
+  border: 1px solid rgba(79, 70, 229, 0.28);
+  border-left: 4px solid #4f46e5;
+  border-radius: 8px;
+  background: #fbfbfe;
+  color: #2c3e50;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.motion-capability-map {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1060px;
+  margin: 0 auto 2rem;
+}
+
+.motion-capability-family {
+  padding: 18px;
+  border: 1px solid rgba(20, 24, 28, 0.12);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.motion-capability-family h3 {
+  margin: 0 0 0.65rem;
+  color: #20242a;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 760;
+}
+
+.motion-capability-family p {
+  margin: 0 0 1rem;
+  color: #4c5965;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.motion-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.motion-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid rgba(79, 70, 229, 0.28);
+  border-radius: 999px;
+  color: #2c3e50;
+  background: #f8f9fd;
+  font-size: 0.9rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.motion-switcher {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.motion-family-tabs,
+.motion-task-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.motion-family-tabs {
+  margin-bottom: 0.85rem;
+}
+
+.motion-task-pills {
+  margin-bottom: 1.45rem;
+}
+
+.motion-family-tabs button,
+.motion-task-pills button,
+.motion-card-action {
+  min-height: 40px;
+  border: 1px solid rgba(20, 24, 28, 0.14);
+  border-radius: 8px;
+  background: #fff;
+  color: #2b3138;
+  cursor: pointer;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.motion-family-tabs button {
+  padding: 0.55rem 1rem;
+}
+
+.motion-task-pills button {
+  padding: 0.5rem 0.85rem;
+}
+
+.motion-family-tabs button:hover,
+.motion-task-pills button:hover,
+.motion-card-action:hover {
+  border-color: rgba(79, 70, 229, 0.58);
+  box-shadow: 0 4px 14px rgba(18, 24, 32, 0.08);
+}
+
+.motion-family-tabs button.is-active,
+.motion-task-pills button.is-active,
+.motion-card.is-active .motion-card-action {
+  border-color: #4f46e5;
+  background: #4f46e5;
+  color: #fff;
+}
+
+.motion-task-pills.is-hidden,
+.motion-panel,
+.motion-card-detail {
+  display: none;
+}
+
+.motion-panel.is-active,
+.motion-card-detail.is-active {
+  display: block;
+}
+
+.motion-panel-header,
+.motion-card-detail-header {
+  max-width: 900px;
+  margin: 0 auto 1.15rem;
+  text-align: center;
+}
+
+.motion-panel-kicker {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #3730a3;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 760;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.motion-panel-header h3,
+.motion-card-detail-header h3 {
+  margin: 0 0 0.35rem;
+  color: #20242a;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 760;
+}
+
+.motion-panel-header p,
+.motion-card-detail-header p {
+  margin: 0;
+  color: #4c5965;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.motion-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1180px;
+  margin: 0 auto 2rem;
+}
+
+.motion-card-gallery-blocks {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.motion-family-block {
+  margin: 0 auto 4rem;
+}
+
+.motion-family-block:last-child {
+  margin-bottom: 0;
+}
+
+.motion-family-block-header {
+  margin: 0 auto 1.4rem;
+  text-align: center;
+}
+
+.motion-family-block-header h3 {
+  margin: 0 auto 1.7rem;
+  color: #20242a;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 2rem;
+  font-weight: 760;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.motion-family-block-header .subsection-description {
+  margin-bottom: 1.45rem;
+}
+
+.motion-family-block[data-card-family="manipulation"] .motion-card-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 960px;
+}
+
+.motion-family-block[data-card-family="locomotion"] .motion-card-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.motion-card-family-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 1.35rem;
+}
+
+.motion-card-family-tabs button {
+  min-height: 42px;
+  padding: 0.55rem 1rem;
+  border: 1px solid rgba(20, 24, 28, 0.14);
+  border-radius: 8px;
+  background: #fff;
+  color: #2b3138;
+  cursor: pointer;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.motion-card-family-tabs button:hover {
+  border-color: rgba(79, 70, 229, 0.58);
+  box-shadow: 0 4px 14px rgba(18, 24, 32, 0.08);
+}
+
+.motion-card-family-tabs button.is-active {
+  border-color: #4f46e5;
+  background: #4f46e5;
+  color: #fff;
+}
+
+.motion-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(20, 24, 28, 0.12);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(18, 24, 32, 0.06);
+}
+
+.motion-card.is-hidden,
+.motion-card-detail.is-hidden {
+  display: none;
+}
+
+.motion-card.is-active {
+  border-color: rgba(79, 70, 229, 0.68);
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.12);
+}
+
+.motion-card video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #0d0f12;
+}
+
+.motion-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+}
+
+.motion-card h3 {
+  margin: 0;
+  color: #20242a;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 760;
+  line-height: 1.25;
+}
+
+.motion-card p {
+  flex: 1;
+  margin: 0;
+  color: #4c5965;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.motion-card-action {
+  width: 100%;
+  padding: 0.45rem 0.55rem;
+}
+
+.motion-card-details {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.motion-montage-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 1180px;
+  margin: 0 auto 2.2rem;
+}
+
+.montage-item {
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+  border-radius: 8px;
+  background: #0d0f12;
+  box-shadow: 0 6px 20px rgba(18, 24, 32, 0.08);
+}
+
+.montage-item.is-large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.montage-item video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.montage-item.is-large video {
+  min-height: 312px;
+}
+
+.montage-label {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: #fff;
+  background: rgba(13, 15, 18, 0.72);
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 760;
+  line-height: 1.2;
+}
+
+.montage-label span:last-child {
+  color: #a5b4fc;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.motion-gallery-title {
+  max-width: 900px;
+  margin: 0 auto 1rem;
+  color: #20242a;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 760;
+  text-align: center;
+}
+
+@media screen and (max-width: 960px) {
+  .motion-card-grid,
+  .motion-montage-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .motion-family-block[data-card-family="manipulation"] .motion-card-grid,
+  .motion-family-block[data-card-family="locomotion"] .motion-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .montage-item.is-large {
+    grid-column: span 2;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .motion-capability-map,
+  .motion-card-grid,
+  .motion-montage-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .motion-family-block[data-card-family="manipulation"] .motion-card-grid,
+  .motion-family-block[data-card-family="locomotion"] .motion-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .montage-item.is-large {
+    grid-column: span 1;
+  }
+
+  .montage-item.is-large video,
+  .montage-item video {
+    min-height: 0;
+  }
+
+  .motion-panel-header h3,
+  .motion-card-detail-header h3 {
+    font-size: 1.28rem;
+  }
+
+  .motion-family-block-header h3 {
+    font-size: 1.55rem;
+  }
+
+  .motion-family-tabs,
+  .motion-task-pills {
+    justify-content: flex-start;
+  }
+}

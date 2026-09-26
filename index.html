@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="AdaDex: Learning Adaptable Dexterous Skills via Hybrid Dexterous Mimicking">
+  <meta name="keywords"
+    content="Dexterous Manipulation, Multi-finger Hands, Reinforcement Learning, Motion Tracking, Goal-conditioned RL, Human-object Interaction, Sim-to-Real">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>AdaDex: Learning Adaptable Dexterous Skills via Hybrid Dexterous Mimicking</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/generated-motion-variants.css">
+  <link rel="stylesheet" href="./static/css/media-theme.css">
+  <link rel="stylesheet" href="./static/css/adadex.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous">
+
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/generated-motion-variants.js"></script>
+  <script src="./static/js/deployment-filmstrip.js"></script>
+
+  <meta property="og:title" content="AdaDex: Learning Adaptable Dexterous Skills via Hybrid Dexterous Mimicking" />
+  <meta property="og:description"
+    content="Anonymous submission. A goal-conditioned RL framework that turns seconds of human motion into adaptable dexterous skills." />
+
+  <style>
+    .hidden_videos {
+      visibility: hidden;
+    }
+  </style>
+</head>
+
+<body class="site-media">
+  <section class="hero is-link video" style="position:relative; height: 56.25vw; min-height: 100vh;">
+    <div class="hero-video"
+      style="position: absolute; left: 50%; top: 0; transform: translateX(-50%); height: 100%; width: 177.77777778vh; min-width: 100%;">
+      <video playsinline autoplay muted loop preload="auto" poster="./static/images/teaser_poster.jpg"
+        style="width: 100%; height: 100%; object-position: center center; object-fit: cover;">
+        <source src="./static/videos/teaser.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="overlay"></div>
+    <div class="hero-head site-topnav">
+      <header class="navbar">
+        <div class="container">
+          <nav class="site-section-nav" aria-label="Section navigation">
+            <a class="navbar-item" href="#abstract">Abstract</a>
+            <a class="navbar-item" href="#beyond">Downstream</a>
+            <a class="navbar-item" href="#real2sim">Real-to-Sim</a>
+            <a class="navbar-item" href="#method">Method</a>
+            <a class="navbar-item" href="#comparison">Comparison</a>
+            <a class="navbar-item" href="#deployment">Sim-to-Real</a>
+          </nav>
+        </div>
+      </header>
+    </div>
+
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title hero-title">AdaDex</h1>
+        <h2 class="subtitle hero-subtitle">
+          Learning Adaptable Dexterous Skills<br class="desktop-br"> via Hybrid Dexterous Mimicking
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero publication-header">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Learning Adaptable Dexterous Skills via Hybrid Dexterous Mimicking</h1>
+
+            <div class="is-size-4 publication-authors">
+              <span class="author-block" style="font-size: 95%;">Anonymous Authors</span>
+            </div>
+
+            <div class="is-size-4 publication-authors author-notes">
+              <span class="author-block" style="font-size: 90%; font-style: italic;">
+                Anonymous submission &middot; under double-blind review
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="abstract">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-2 section-title-accent">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Dexterous multi-finger hands hold promise to unlock diverse skills like functional grasps, in-hand
+              reorientation, and dynamic handover that the human-designed world assumes, yet existing learning recipes
+              force a trade-off. Goal-reaching reinforcement learning generalizes to arbitrary object poses but, lacking
+              any human prior, converges to unnatural and unreliable finger strategies; motion tracking reproduces
+              human-like behavior from a single clip but cannot deviate from it. We present <strong class="method-name">AdaDex</strong>, a goal-conditioned
+              RL framework that turns a single hand-object trajectory of a few seconds&mdash;from mocap data or HOI
+              reconstruction from in-the-wild RGB(D) video&mdash;into an adaptable dexterous skill.
+            </p>
+            <p>
+              At the core of <strong class="method-name">AdaDex</strong> is <strong>Hybrid Dexterous Mimicking</strong>: a shared policy is trained on two
+              populations of massively parallel environments: motion tracking environments trained with dense motion
+              tracking objective, which instill the human prior from human motion; and generalization environments
+              with noised initial states and goals and a sparse object-success reward, which force the skill to work
+              far off the reference. From seconds of human motion per skill, the resulting policies can learn diverse
+              adaptable dexterous skills, such as functional grasping, object reposing, in-hand reorientation with
+              finger gaiting, and dynamic behaviors like throw-and-catch. Our method outperforms baselines in terms of
+              generalization and functionality, and we demonstrate transfer across simulators and to the real world.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section generated-motion-section" id="beyond">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div style="text-align: center;">
+            <h2 class="title is-2 section-title-accent">Downstream Tasks</h2>
+          </div>
+          <p class="subsection-description">
+            The same recipe learns from in-the-wild video, drives downstream tasks from new goal sequences, and transfers across robot hands.
+          </p>
+          <figure class="method-figure section-figure">
+            <img class="paper-figure" src="./static/images/downstream_gallery.jpg" alt="AdaDex skills across robot hands" />
+            <figcaption>AdaDex learns functional grasping, in-hand reorientation, and dynamic throw-and-catch, achieves
+              various downstream tasks, and works across robot hand embodiments (Arti-MANO, XHand, Wuji, Sharpa, and
+              XHand + xArm).</figcaption>
+          </figure>
+
+          <div class="motion-card-gallery motion-card-gallery-blocks">
+            <section class="motion-family-block" data-card-family="versatility">
+              <div class="motion-family-block-header">
+                <h3>Versatile Dexterous Skills</h3>
+                <p class="subsection-description">
+                  Skills learned from seconds of human motion, driven by new sequences of wrist and object goals.
+                </p>
+              </div>
+
+              <div class="motion-card-grid">
+                <article class="motion-card is-active" data-motion-target="cards-pen-spin">
+                  <video autoplay muted loop playsinline src="./static/videos/pen-spin/pen-spin_01.mp4"></video>
+                  <div class="motion-card-body">
+                    <h3><i class="fas fa-pen-nib"></i>&nbsp; Pen spin &amp; pickup</h3>
+                    <p>In-hand rolling and spinning with finger gaiting.</p>
+                    <button class="motion-card-action" type="button">View examples</button>
+                  </div>
+                </article>
+                <article class="motion-card" data-motion-target="cards-aprilcube">
+                  <video autoplay muted loop playsinline src="./static/videos/aprilcube/aprilcube_x01.mp4"></video>
+                  <div class="motion-card-body">
+                    <h3><i class="fas fa-cube"></i>&nbsp; Throw, catch &amp; reorient</h3>
+                    <p>Dynamic throw-and-catch, and picking up and reorienting a cube in hand.</p>
+                    <button class="motion-card-action" type="button">View examples</button>
+                  </div>
+                </article>
+                <article class="motion-card" data-motion-target="cards-writing">
+                  <video autoplay muted loop playsinline src="./static/videos/writing/writing_01.mp4"></video>
+                  <div class="motion-card-body">
+                    <h3><i class="fas fa-signature"></i>&nbsp; Writing</h3>
+                    <p>Picks up the marker, reorients it in hand into a writing grasp, then writes by following waypoints.</p>
+                    <button class="motion-card-action" type="button">View examples</button>
+                  </div>
+                </article>
+                <article class="motion-card" data-motion-target="cards-pan-toss">
+                  <video autoplay muted loop playsinline src="./static/videos/pan-toss/pan-toss_01.mp4"></video>
+                  <div class="motion-card-body">
+                    <h3><i class="fas fa-fire-burner"></i>&nbsp; Pan toss</h3>
+                    <p>Tossing an object with a frying pan.</p>
+                    <button class="motion-card-action" type="button">View examples</button>
+                  </div>
+                </article>
+                <article class="motion-card" data-motion-target="cards-hammering">
+                  <video autoplay muted loop playsinline src="./static/videos/hammering/hammering_01.mp4"></video>
+                  <div class="motion-card-body">
+                    <h3><i class="fas fa-hammer"></i>&nbsp; Hammering</h3>
+                    <p>Functional hammer grasp striking new targets.</p>
+                    <button class="motion-card-action" type="button">View examples</button>
+                  </div>
+                </article>
+                <article class="motion-card" data-motion-target="cards-pouring">
+                  <video autoplay muted loop playsinline src="./static/videos/pouring/pouring_01.mp4"></video>
+                  <div class="motion-card-body">
+                    <h3><i class="fas fa-mug-hot"></i>&nbsp; Pouring</h3>
+                    <p>Grasp, lift, and tilt a mug to pour into a container.</p>
+                    <button class="motion-card-action" type="button">View examples</button>
+                  </div>
+                </article>
+                <article class="motion-card" data-motion-target="cards-sweeping">
+                  <video autoplay muted loop playsinline src="./static/videos/sweeping/sweeping_01.mp4"></video>
+                  <div class="motion-card-body">
+                    <h3><i class="fas fa-broom"></i>&nbsp; Sweeping</h3>
+                    <p>Sweeping objects into a bin with a hand-held brush.</p>
+                    <button class="motion-card-action" type="button">View examples</button>
+                  </div>
+                </article>
+              </div>
+
+              <div class="motion-card-details">
+                <div class="motion-card-detail is-active" id="cards-pen-spin">
+                  <div class="motion-card-detail-header">
+                    <h3>Pen spin &amp; pickup</h3>
+                  </div>
+                  <div class="video-carousel" data-per-view="2">
+                    <div class="carousel-track">
+                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/pen-spin_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_01.mp4"></video><p class="clip-caption">XHand &middot; marker spin</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_02.mp4"></video><p class="clip-caption">XHand &middot; marker spin</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_03.mp4"></video><p class="clip-caption">Wuji &middot; pick up &amp; roll</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_04.mp4"></video><p class="clip-caption">ArtiMANO &middot; pick up &amp; roll</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_05.mp4"></video><p class="clip-caption">Sharpa &middot; pick up &amp; roll</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_06.mp4"></video><p class="clip-caption">Wuji &middot; pick up &amp; roll</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_07.mp4"></video><p class="clip-caption">ArtiMANO &middot; marker spin</p></div>
+                    </div>
+                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+                <div class="motion-card-detail" id="cards-aprilcube">
+                  <div class="motion-card-detail-header">
+                    <h3>Throw, catch &amp; reorient</h3>
+                  </div>
+                  <div class="video-carousel" data-per-view="2">
+                    <div class="carousel-track">
+                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/aprilcube_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/aprilcube/aprilcube_x01.mp4"></video><p class="clip-caption">XHand &middot; reorient, throw &amp; catch</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/aprilcube/aprilcube_01.mp4"></video><p class="clip-caption">Throw &amp; catch &middot; XHand</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/aprilcube/aprilcube_02.mp4"></video><p class="clip-caption">Pick up &amp; reorient &middot; XHand</p></div>
+                    </div>
+                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+                <div class="motion-card-detail" id="cards-writing">
+                  <div class="motion-card-detail-header">
+                    <h3>Writing</h3>
+                  </div>
+                  <div class="video-carousel" data-per-view="2">
+                    <div class="carousel-track">
+                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/writing_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/writing/writing_01.mp4"></video><p class="clip-caption">Wuji &middot; writing</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/writing/writing_02.mp4"></video><p class="clip-caption">ArtiMANO &middot; writing</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/writing/writing_03.mp4"></video><p class="clip-caption">ArtiMANO &middot; writing</p></div>
+                    </div>
+                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+                <div class="motion-card-detail" id="cards-pan-toss">
+                  <div class="motion-card-detail-header">
+                    <h3>Pan toss</h3>
+                  </div>
+                  <div class="video-carousel" data-per-view="2">
+                    <div class="carousel-track">
+                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/pan-toss_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_01.mp4"></video><p class="clip-caption">Sharpa &middot; pan toss</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_02.mp4"></video><p class="clip-caption">Wuji &middot; pan toss</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_03.mp4"></video><p class="clip-caption">XHand &middot; pan toss</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_04.mp4"></video><p class="clip-caption">ArtiMANO &middot; pan toss</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_05.mp4"></video><p class="clip-caption">Sharpa &middot; pan toss</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_06.mp4"></video><p class="clip-caption">Wuji &middot; pan toss</p></div>
+                    </div>
+                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+                <div class="motion-card-detail" id="cards-hammering">
+                  <div class="motion-card-detail-header">
+                    <h3>Hammering</h3>
+                  </div>
+                  <div class="video-carousel" data-per-view="2">
+                    <div class="carousel-track">
+                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/hammering_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_01.mp4"></video><p class="clip-caption">Sharpa &middot; hammering</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_02.mp4"></video><p class="clip-caption">Wuji &middot; hammering</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_03.mp4"></video><p class="clip-caption">XHand &middot; hammering</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_04.mp4"></video><p class="clip-caption">ArtiMANO &middot; hammering</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_05.mp4"></video><p class="clip-caption">Sharpa &middot; hammering</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_06.mp4"></video><p class="clip-caption">Wuji &middot; hammering</p></div>
+                    </div>
+                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+                <div class="motion-card-detail" id="cards-pouring">
+                  <div class="motion-card-detail-header">
+                    <h3>Pouring</h3>
+                  </div>
+                  <div class="video-carousel" data-per-view="2">
+                    <div class="carousel-track">
+                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/pouring_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_01.mp4"></video><p class="clip-caption">Wuji &middot; pouring</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_02.mp4"></video><p class="clip-caption">Sharpa &middot; pouring</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_03.mp4"></video><p class="clip-caption">XHand &middot; pouring</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_04.mp4"></video><p class="clip-caption">Sharpa &middot; pouring</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_05.mp4"></video><p class="clip-caption">Wuji &middot; pouring</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_06.mp4"></video><p class="clip-caption">XHand &middot; pouring</p></div>
+                    </div>
+                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+                <div class="motion-card-detail" id="cards-sweeping">
+                  <div class="motion-card-detail-header">
+                    <h3>Sweeping</h3>
+                  </div>
+                  <div class="video-carousel" data-per-view="2">
+                    <div class="carousel-track">
+                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/sweeping_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/sweeping/sweeping_01.mp4"></video><p class="clip-caption">ArtiMANO &middot; sweeping</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/sweeping/sweeping_02.mp4"></video><p class="clip-caption">ArtiMANO &middot; sweeping</p></div>
+                    </div>
+                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="motion-family-block" data-card-family="embodiment">
+              <div class="motion-family-block-header">
+                <h3>Across Embodiments</h3>
+                <p class="subsection-description">
+                  Human references are retargeted to different dexterous hands and learned without changing the method.
+                </p>
+              </div>
+
+              <div class="motion-card-grid">
+                <article class="motion-card is-active" data-motion-target="cards-hand-artimano">
+                  <video autoplay muted loop playsinline src="./static/videos/hand-artimano/hand-artimano_01.mp4"></video>
+                  <div class="motion-card-body">
+                    <h3><i class="fas fa-hand-peace"></i>&nbsp; ArtiMANO</h3>
+                    <p>Tracking and goal reaching with ArtiMANO.</p>
+                    <button class="motion-card-action" type="button">View examples</button>
+                  </div>
+                </article>
+                <article class="motion-card" data-motion-target="cards-hand-xhand">
+                  <video autoplay muted loop playsinline src="./static/videos/hand-xhand/hand-xhand_01.mp4"></video>
+                  <div class="motion-card-body">
+                    <h3><i class="fas fa-hand"></i>&nbsp; XHand</h3>
+                    <p>Tracking and goal reaching with XHand.</p>
+                    <button class="motion-card-action" type="button">View examples</button>
+                  </div>
+                </article>
+                <article class="motion-card" data-motion-target="cards-hand-sharpa">
+                  <video autoplay muted loop playsinline src="./static/videos/hand-sharpa/hand-sharpa_01.mp4"></video>
+                  <div class="motion-card-body">
+                    <h3><i class="fas fa-hand-sparkles"></i>&nbsp; Sharpa</h3>
+                    <p>Tracking and goal reaching with Sharpa.</p>
+                    <button class="motion-card-action" type="button">View examples</button>
+                  </div>
+                </article>
+                <article class="motion-card" data-motion-target="cards-hand-wuji">
+                  <video autoplay muted loop playsinline src="./static/videos/hand-wuji/hand-wuji_01.mp4"></video>
+                  <div class="motion-card-body">
+                    <h3><i class="fas fa-hand-back-fist"></i>&nbsp; Wuji</h3>
+                    <p>Tracking and goal reaching with Wuji.</p>
+                    <button class="motion-card-action" type="button">View examples</button>
+                  </div>
+                </article>
+              </div>
+
+              <div class="motion-card-details">
+                <div class="motion-card-detail is-active" id="cards-hand-artimano">
+                  <div class="motion-card-detail-header">
+                    <h3>ArtiMANO</h3>
+                  </div>
+                  <div class="video-carousel" data-per-view="2">
+                    <div class="carousel-track">
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_01.mp4"></video><p class="clip-caption">Mug &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_02.mp4"></video><p class="clip-caption">Mug &middot; noisy goals</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_03.mp4"></video><p class="clip-caption">Pen &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_04.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_05.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_06.mp4"></video><p class="clip-caption">Frying pan &middot; cook &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_07.mp4"></video><p class="clip-caption">Hammer &middot; use &middot; tracking</p></div>
+                    </div>
+                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+                <div class="motion-card-detail" id="cards-hand-xhand">
+                  <div class="motion-card-detail-header">
+                    <h3>XHand</h3>
+                  </div>
+                  <div class="video-carousel" data-per-view="2">
+                    <div class="carousel-track">
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_01.mp4"></video><p class="clip-caption">Mug &middot; noisy goals</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_02.mp4"></video><p class="clip-caption">Frying pan &middot; cook &middot; noisy goals</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_03.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_04.mp4"></video><p class="clip-caption">Hammer &middot; use &middot; noisy goals</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_05.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                    </div>
+                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+                <div class="motion-card-detail" id="cards-hand-sharpa">
+                  <div class="motion-card-detail-header">
+                    <h3>Sharpa</h3>
+                  </div>
+                  <div class="video-carousel" data-per-view="2">
+                    <div class="carousel-track">
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_01.mp4"></video><p class="clip-caption">Mug &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_02.mp4"></video><p class="clip-caption">Mug &middot; noisy goals</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_03.mp4"></video><p class="clip-caption">Pen &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_04.mp4"></video><p class="clip-caption">Pen &middot; noisy goals</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_05.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_06.mp4"></video><p class="clip-caption">Frying pan &middot; cook &middot; noisy goals</p></div>
+                    </div>
+                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+                <div class="motion-card-detail" id="cards-hand-wuji">
+                  <div class="motion-card-detail-header">
+                    <h3>Wuji</h3>
+                  </div>
+                  <div class="video-carousel" data-per-view="2">
+                    <div class="carousel-track">
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_01.mp4"></video><p class="clip-caption">Mug &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_02.mp4"></video><p class="clip-caption">Mug &middot; noisy goals</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_03.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_04.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_05.mp4"></video><p class="clip-caption">Frying pan &middot; cook &middot; tracking</p></div>
+                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_06.mp4"></video><p class="clip-caption">Hammer &middot; use &middot; tracking</p></div>
+                    </div>
+                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section generated-motion-section" id="real2sim">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div style="text-align: center;">
+            <h2 class="title is-2 section-title-accent">Real-to-Sim from Casual Video</h2>
+          </div>
+          <p class="subsection-description">
+            A few seconds of casual RGB-D video become a simulation-ready hand-object reference, which AdaDex turns into
+            an adaptable skill. Here, in-hand reorientation of a cube.
+          </p>
+
+          <div class="compare-controls" data-compare-controls="cube">
+            <button class="compare-control" type="button" data-compare-action="play"><i class="fas fa-play"></i>&nbsp; Play all</button>
+            <button class="compare-control" type="button" data-compare-action="stop"><i class="fas fa-stop"></i>&nbsp; Stop all</button>
+          </div>
+          <div class="compare-grid compare-grid-3">
+            <div><h4>Raw RGB-D video</h4>
+              <video data-compare-slot="raw" data-compare-group="cube" muted loop playsinline controls preload="metadata" src="./static/videos/real2sim/aprilcube_raw.mp4"></video>
+            </div>
+            <div><h4>HOI 3D reconstruction</h4>
+              <video data-compare-slot="recon" data-compare-group="cube" muted loop playsinline controls preload="metadata" src="./static/videos/real2sim/aprilcube_recon.mp4"></video>
+            </div>
+            <div><h4 class="is-ours">AdaDex rollout</h4>
+              <video data-compare-slot="rollout" data-compare-group="cube" muted loop playsinline controls preload="metadata" src="./static/videos/real2sim/aprilcube_rollout.mp4"></video>
+            </div>
+          </div>
+
+          <div class="r2s-sbs">
+            <h4>Reconstructed reference vs. AdaDex</h4>
+            <p class="panel-legend"><strong>Left:</strong> reconstructed reference (goal object pose and wrist frame) &nbsp;&middot;&nbsp; <strong>Right:</strong> AdaDex rollout</p>
+            <video class="wide-video" muted loop playsinline controls preload="metadata" src="./static/videos/real2sim/aprilcube_side_by_side.mp4"></video>
+          </div>
+
+          <div class="r2s-baselines">
+            <h3 class="title is-3">Reconstruction vs. Baselines</h3>
+            <p class="subsection-description">
+              HOI reconstruction from the same casual RGB-D video with our pipeline, Do-As-I-Do, and EgoInfinity.
+              Background details in the raw videos are blurred for anonymity.
+            </p>
+            <div class="compare-picker">
+              <div class="compare-chips">
+                <button class="compare-chip is-active" type="button" data-compare-group="r2s" data-key="bottle">Bottle</button>
+                <button class="compare-chip" type="button" data-compare-group="r2s" data-key="box">Box</button>
+              </div>
+            </div>
+            <div class="compare-controls" data-compare-controls="r2s">
+              <button class="compare-control" type="button" data-compare-action="play"><i class="fas fa-play"></i>&nbsp; Play all</button>
+              <button class="compare-control" type="button" data-compare-action="stop"><i class="fas fa-stop"></i>&nbsp; Stop all</button>
+            </div>
+            <div class="compare-grid compare-grid-4">
+              <div><h4>Raw RGB-D video</h4><video data-compare-slot="raw" data-compare-group="r2s" muted loop playsinline controls preload="metadata" src="./static/videos/real2sim/r2s-bottle_raw.mp4"></video></div>
+              <div><h4 class="is-ours">Ours</h4><video data-compare-slot="ours" data-compare-group="r2s" muted loop playsinline controls preload="metadata" src="./static/videos/real2sim/r2s-bottle_ours.mp4"></video></div>
+              <div><h4>Do-As-I-Do</h4><video data-compare-slot="doasido" data-compare-group="r2s" muted loop playsinline controls preload="metadata" src="./static/videos/real2sim/r2s-bottle_doasido.mp4"></video></div>
+              <div><h4>EgoInfinity</h4><video data-compare-slot="egoinfinity" data-compare-group="r2s" muted loop playsinline controls preload="metadata" src="./static/videos/real2sim/r2s-bottle_egoinfinity.mp4"></video></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="method">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2 class="title is-2 section-title-accent">Method</h2>
+      </div>
+      <p class="subsection-description">
+        Motion tracking and goal reaching are the same goal-conditioned problem: both ask a policy to bring the object
+        and wrist to a target pose, and differ only in where the goal comes from and how progress is rewarded.
+        Hybrid Dexterous Mimicking trains one shared policy across two populations of massively parallel environments.
+      </p>
+
+      <div class="method-figure-stack">
+        <figure class="method-figure">
+          <img class="paper-figure" src="./static/images/method_overview.jpg" alt="Method overview of AdaDex" />
+          <figcaption>
+            <strong>Left:</strong> <strong>Hybrid Dexterous Mimicking</strong> is a goal-conditioned RL formulation in
+            which dense reference tracking and sparse goal reaching are trained as parallel environment types under a
+            single shared actor. <strong>Right:</strong> our method can learn adaptable dexterous skills with a single
+            human motion reconstructed from video and transfer to an unseen simulator (MuJoCo) and the real world.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="comparison">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2 class="title is-2 section-title-accent">Comparison with Baselines</h2>
+      </div>
+      <p class="subsection-description">
+        We benchmark on 12 GRAB sequences. Each policy is trained on only one motion per object and evaluated on that
+        motion, on two similar but unseen motions, and on randomly generated goals. Below, the motion tracking baseline
+        ManipTrans and the goal-reaching baseline SimToolReal are compared against AdaDex on all 36 benchmark motions:
+        pick a motion to see the rollouts side by side with the human reference.
+      </p>
+
+      <div class="compare-picker">
+        <div class="compare-tabs">
+          <button class="compare-tab is-active" type="button" data-split="seen">Seen motions (12)</button>
+          <button class="compare-tab" type="button" data-split="unseen">Similar but unseen (24)</button>
+        </div>
+        <div class="compare-chips" data-split-panel="seen">
+            <button class="compare-chip is-active" type="button" data-compare-group="bench" data-key="seen-01">Airplane &middot; fly</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="seen-02">Alarm clock &middot; pass</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="seen-03">Apple &middot; eat</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="seen-04">Bowl &middot; pass</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="seen-05">Cup &middot; pour</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="seen-06">Frying pan &middot; cook</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="seen-07">Hammer &middot; use</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="seen-08">Toy hand &middot; inspect</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="seen-09">Stamp &middot; stamp</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="seen-10">Stapler &middot; staple</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="seen-11">Teapot &middot; pour</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="seen-12">Wine glass &middot; drink</button>
+        </div>
+        <div class="compare-chips is-hidden" data-split-panel="unseen">
+            <button class="compare-chip is-active" type="button" data-compare-group="bench" data-key="unseen-13">Airplane &middot; fly 1</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-14">Apple &middot; eat 1</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-15">Cup &middot; drink</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-16">Hammer &middot; use 1</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-17">Hammer &middot; use 2</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-18">Toy hand &middot; inspect 1</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-19">Stamp &middot; stamp 1</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-20">Alarm clock &middot; pass 1</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-21">Apple &middot; eat 2</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-22">Cup &middot; pour</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-23">Wine glass &middot; toast 1</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-24">Alarm clock &middot; pass 2</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-25">Frying pan &middot; cook 1</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-26">Frying pan &middot; cook 2</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-27">Stamp &middot; stamp 2</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-28">Stapler &middot; staple 1</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-29">Teapot &middot; pour 1</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-30">Bowl &middot; pass</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-31">Toy hand &middot; inspect 2</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-32">Wine glass &middot; toast 2</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-33">Airplane &middot; fly 2</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-34">Bowl &middot; drink</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-35">Stapler &middot; staple 2</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-36">Teapot &middot; pour 2</button>
+        </div>
+      </div>
+
+      <div class="compare-controls" data-compare-controls="bench">
+        <button class="compare-control" type="button" data-compare-action="play"><i class="fas fa-play"></i>&nbsp; Play all</button>
+        <button class="compare-control" type="button" data-compare-action="stop"><i class="fas fa-stop"></i>&nbsp; Stop all</button>
+      </div>
+
+      <div class="compare-grid compare-grid-4">
+        <div><h4>Human reference</h4><video data-compare-slot="reference" data-compare-group="bench" muted loop playsinline controls preload="metadata" src="./static/videos/compare/seen-01_reference.mp4"></video></div>
+        <div><h4>ManipTrans</h4><video data-compare-slot="maniptrans" data-compare-group="bench" muted loop playsinline controls preload="metadata" src="./static/videos/compare/seen-01_maniptrans.mp4"></video></div>
+        <div><h4>SimToolReal <span class="compare-note">(Sharpa hand)</span></h4><video data-compare-slot="simtoolreal" data-compare-group="bench" muted loop playsinline controls preload="metadata" src="./static/videos/compare/seen-01_simtoolreal.mp4"></video></div>
+        <div><h4 class="is-ours">AdaDex (Ours)</h4><video data-compare-slot="adadex" data-compare-group="bench" muted loop playsinline controls preload="metadata" src="./static/videos/compare/seen-01_adadex.mp4"></video></div>
+      </div>
+
+      <div class="results-table-wrap">
+        <h4 class="title is-4">Motion tracking on seen and similar-but-unseen motions</h4>
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Progress (%) &uarr;</th>
+              <th>Obj. pos. err. (cm) &darr;</th>
+              <th>Obj. rot. err. (&deg;) &darr;</th>
+              <th>Wrist pos. err. (cm) &darr;</th>
+              <th>Wrist rot. err. (&deg;) &darr;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="group-row"><td colspan="6">Setting (i): seen (trained) motions</td></tr>
+              <tr><td>ManipTrans</td><td>35.20 <span class="std">&plusmn; 29.71</span></td><td>13.69 <span class="std">&plusmn; 16.11</span></td><td>41.61 <span class="std">&plusmn; 40.97</span></td><td>45.55 <span class="std">&plusmn; 65.28</span></td><td>55.22 <span class="std">&plusmn; 44.03</span></td></tr>
+              <tr><td>SimToolReal</td><td>9.72 <span class="std">&plusmn; 5.44</span></td><td>22.15 <span class="std">&plusmn; 18.32</span></td><td>53.56 <span class="std">&plusmn; 26.77</span></td><td>21.43 <span class="std">&plusmn; 9.79</span></td><td>65.30 <span class="std">&plusmn; 21.25</span></td></tr>
+              <tr><td><em>w/o TrackEnv</em></td><td>8.45 <span class="std">&plusmn; 4.98</span></td><td>34.10 <span class="std">&plusmn; 20.38</span></td><td>76.64 <span class="std">&plusmn; 31.72</span></td><td>3.65 <span class="std">&plusmn; 1.81</span></td><td>42.52 <span class="std">&plusmn; 25.23</span></td></tr>
+              <tr><td><em>w/o GenEnv</em></td><td class="best">97.47 <span class="std">&plusmn; 8.40</span></td><td class="best">0.62 <span class="std">&plusmn; 0.29</span></td><td class="best">2.24 <span class="std">&plusmn; 0.79</span></td><td class="best">2.76 <span class="std">&plusmn; 0.51</span></td><td class="best">8.16 <span class="std">&plusmn; 4.73</span></td></tr>
+              <tr class="ours"><td><strong>AdaDex</strong></td><td class="second">96.74 <span class="std">&plusmn; 6.21</span></td><td class="second">0.72 <span class="std">&plusmn; 0.32</span></td><td class="second">4.16 <span class="std">&plusmn; 1.19</span></td><td class="second">2.82 <span class="std">&plusmn; 0.61</span></td><td class="second">11.45 <span class="std">&plusmn; 5.26</span></td></tr>
+            <tr class="group-row"><td colspan="6">Setting (ii): similar but unseen motions</td></tr>
+              <tr><td>ManipTrans</td><td>7.28 <span class="std">&plusmn; 6.57</span></td><td>37.95 <span class="std">&plusmn; 20.67</span></td><td>88.49 <span class="std">&plusmn; 26.81</span></td><td>256.50 <span class="std">&plusmn; 199.19</span></td><td>114.53 <span class="std">&plusmn; 21.40</span></td></tr>
+              <tr><td>SimToolReal</td><td>13.68 <span class="std">&plusmn; 17.88</span></td><td class="second">19.80 <span class="std">&plusmn; 16.20</span></td><td class="second">50.45 <span class="std">&plusmn; 25.85</span></td><td>24.34 <span class="std">&plusmn; 10.44</span></td><td>93.52 <span class="std">&plusmn; 33.78</span></td></tr>
+              <tr><td><em>w/o TrackEnv</em></td><td>9.62 <span class="std">&plusmn; 17.71</span></td><td>25.77 <span class="std">&plusmn; 16.92</span></td><td>63.15 <span class="std">&plusmn; 35.06</span></td><td class="best">14.24 <span class="std">&plusmn; 8.11</span></td><td class="second">79.26 <span class="std">&plusmn; 38.84</span></td></tr>
+              <tr><td><em>w/o GenEnv</em></td><td class="second">31.75 <span class="std">&plusmn; 31.23</span></td><td>23.25 <span class="std">&plusmn; 22.82</span></td><td>52.13 <span class="std">&plusmn; 38.84</span></td><td>31.13 <span class="std">&plusmn; 23.28</span></td><td>87.91 <span class="std">&plusmn; 33.98</span></td></tr>
+              <tr class="ours"><td><strong>AdaDex</strong></td><td class="best">80.02 <span class="std">&plusmn; 26.01</span></td><td class="best">6.07 <span class="std">&plusmn; 7.60</span></td><td class="best">15.83 <span class="std">&plusmn; 12.93</span></td><td class="second">14.32 <span class="std">&plusmn; 7.62</span></td><td class="best">72.68 <span class="std">&plusmn; 44.90</span></td></tr>
+          </tbody>
+        </table>
+        <p class="results-caption">Best in <strong>bold</strong>, second best <u>underlined</u>. Progress is the
+          fraction of the clip tracked before the object deviates by more than 5&nbsp;cm or 20&deg;.</p>
+      </div>
+
+      <div class="results-table-wrap" style="max-width: 560px;">
+        <h4 class="title is-4">Random goal reaching</h4>
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Progress (%) &uarr;</th>
+              <th>SR (%) &uarr;</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr><td>ManipTrans</td><td>1.72 <span class="std">&plusmn; 2.27</span></td><td>0.00 <span class="std">&plusmn; 0.00</span></td></tr>
+              <tr><td>SimToolReal</td><td class="second">44.60 <span class="std">&plusmn; 31.59</span></td><td class="best">31.71 <span class="std">&plusmn; 32.56</span></td></tr>
+              <tr><td><em>w/o TrackEnv</em></td><td>4.34 <span class="std">&plusmn; 7.38</span></td><td>1.43 <span class="std">&plusmn; 3.58</span></td></tr>
+              <tr><td><em>w/o GenEnv</em></td><td>14.53 <span class="std">&plusmn; 9.22</span></td><td>0.52 <span class="std">&plusmn; 1.03</span></td></tr>
+              <tr class="ours"><td><strong>AdaDex</strong></td><td class="best">51.80 <span class="std">&plusmn; 21.80</span></td><td class="second">27.08 <span class="std">&plusmn; 17.41</span></td></tr>
+          </tbody>
+        </table>
+        <p class="results-caption">Each trial attempts 10 consecutive procedural object goals. Progress is the
+          percentage of goals reached; SR is the percentage of rollouts reaching all 10.</p>
+      </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="deployment">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div style="text-align: center;">
+            <h2 class="title is-2 section-title-accent">Sim-to-Sim and Sim-to-Real Transfer</h2>
+          </div>
+          <p class="subsection-description">
+            Policies trained in Isaac Gym transfer to MuJoCo without retraining. In the real world we test three GRAB
+            motions (apple, hammer, cup) and two real-to-sim motions (sweep, AprilCube), open-loop replaying the joint
+            targets generated by the policy at 1x speed (30&nbsp;Hz) so the real-time dynamics are preserved.
+          </p>
+
+          <figure class="method-figure section-figure">
+            <img class="paper-figure" src="./static/images/sim2real.jpg" alt="Sim-to-sim and sim-to-real transfer" />
+            <figcaption>Closed-loop sim-to-sim transfer and open-loop sim-to-real rollouts streamed in real time (1x
+              speed, 30&nbsp;Hz): functional grasping of a thin hammer, pouring from a cup, in-hand gait switching of a
+              sweep, and in-hand reorientation of a cube.</figcaption>
+          </figure>
+
+          <div class="deployment-block">
+            <h3 class="title is-3">Sim-to-Sim Transfer</h3>
+            <p class="subsection-description">
+              The same policy on each GRAB benchmark motion, rolled out in Isaac Gym and transferred zero-shot to MuJoCo without retraining.
+            </p>
+            <div class="compare-picker">
+              <div class="compare-chips">
+            <button class="compare-chip is-active" type="button" data-compare-group="s2s" data-key="s2s-alarmclock">Alarm clock &middot; pass</button>
+            <button class="compare-chip" type="button" data-compare-group="s2s" data-key="s2s-bowl">Bowl &middot; pass</button>
+            <button class="compare-chip" type="button" data-compare-group="s2s" data-key="s2s-cup">Cup &middot; pour</button>
+            <button class="compare-chip" type="button" data-compare-group="s2s" data-key="s2s-fryingpan">Frying pan &middot; cook</button>
+            <button class="compare-chip" type="button" data-compare-group="s2s" data-key="s2s-hammer">Hammer &middot; use</button>
+            <button class="compare-chip" type="button" data-compare-group="s2s" data-key="s2s-hand">Toy hand &middot; inspect</button>
+            <button class="compare-chip" type="button" data-compare-group="s2s" data-key="s2s-stamp">Stamp &middot; stamp</button>
+            <button class="compare-chip" type="button" data-compare-group="s2s" data-key="s2s-stapler">Stapler &middot; staple</button>
+            <button class="compare-chip" type="button" data-compare-group="s2s" data-key="s2s-teapot">Teapot &middot; pour</button>
+            <button class="compare-chip" type="button" data-compare-group="s2s" data-key="s2s-wineglass">Wine glass &middot; drink</button>
+              </div>
+            </div>
+            <div class="compare-controls" data-compare-controls="s2s">
+              <button class="compare-control" type="button" data-compare-action="play"><i class="fas fa-play"></i>&nbsp; Play all</button>
+              <button class="compare-control" type="button" data-compare-action="stop"><i class="fas fa-stop"></i>&nbsp; Stop all</button>
+            </div>
+            <div class="compare-grid compare-grid-2">
+              <div><h4>Isaac Gym <span class="compare-note">(training simulator)</span></h4><video data-compare-slot="isaacgym" data-compare-group="s2s" muted loop playsinline controls preload="metadata" src="./static/videos/compare/seen-02_adadex.mp4"></video></div>
+              <div><h4 class="is-ours">MuJoCo <span class="compare-note">(zero-shot transfer)</span></h4><video data-compare-slot="mujoco" data-compare-group="s2s" muted loop playsinline controls preload="metadata" src="./static/videos/sim2sim/s2s-alarmclock_mujoco.mp4"></video></div>
+            </div>
+          </div>
+
+          <div class="deployment-block">
+            <h3 class="title is-3">Arm-Hand System</h3>
+            <p class="subsection-description">
+              A simulated rollout with an XHand mounted on an xArm, controlled by the same goal interface.
+            </p>
+            <video class="wide-video" muted loop playsinline controls preload="metadata" src="./static/videos/arm/xarm_xhand_01.mp4"></video>
+          </div>
+
+          <div class="deployment-block">
+            <h3 class="title is-3">Real-World Rollouts</h3>
+            <p class="subsection-description">
+              Open-loop real-world rollouts: the joint targets generated by the policy in simulation, replayed on the real arm-hand system at 1x speed (30&nbsp;Hz). Pick a rollout below.
+            </p>
+
+            <div class="deployment-layout deployment-layout-filmstrip">
+              <section class="deployment-feature-task" data-feature-group="real">
+                <div class="deployment-feature-stage">
+                  <video id="real-feature" class="deployment-feature-video" muted loop playsinline controls preload="metadata" src="./static/videos/real/real_01.mp4"></video>
+                </div>
+                <div class="deployment-thumb-strip" aria-label="Real-world rollout selector">
+                  <button class="deployment-thumb is-active" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_01.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_01.mp4"></video>
+                    <span>Apple</span>
+                  </button>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_02.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_02.mp4"></video>
+                    <span>Cup</span>
+                  </button>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_03.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_03.mp4"></video>
+                    <span>Hammer</span>
+                  </button>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_04.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_04.mp4"></video>
+                    <span>Sweep</span>
+                  </button>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_05.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_05.mp4"></video>
+                    <span>Cube (on table)</span>
+                  </button>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_06.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_06.mp4"></video>
+                    <span>Cube (in hand) 1</span>
+                  </button>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_07.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_07.mp4"></video>
+                    <span>Cube (in hand) 2</span>
+                  </button>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_08.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_08.mp4"></video>
+                    <span>Cube (in hand) 3</span>
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>Page template borrowed from <a href="https://nerfies.github.io/"><span class="dnerf">Nerfies</span></a> and
+          <a href="https://umi-on-legs.github.io"><span class="dnerf">UMI-On-Legs</span></a>.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var allVideos = document.querySelectorAll('video');
+      var heroVideos = document.querySelectorAll('.hero-video video');
+      var trailerVideos = document.querySelectorAll('.trailer-video');
+      var musicVideos = document.querySelectorAll('.music-video');
+
+      var contentVideos = Array.from(allVideos).filter(function (video) {
+        return !Array.from(heroVideos).includes(video) &&
+          !Array.from(trailerVideos).includes(video) &&
+          !Array.from(musicVideos).includes(video);
+      });
+
+      function pauseVideo(video) {
+        video.classList.add("hidden_videos");
+        video.pause();
+      }
+
+      function playVideo(video) {
+        if (video.dataset.userStopped === '1') {
+          video.classList.remove("hidden_videos");
+          return;
+        }
+        if (video.paused) {
+          video.classList.remove("hidden_videos");
+          video.play().catch(function (error) {
+            console.log("Autoplay prevented:", error);
+          });
+        }
+      }
+
+      function isElementPartiallyInViewport(element) {
+        var rect = element.getBoundingClientRect();
+        return (
+          rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.bottom >= 0 &&
+          rect.left <= (window.innerWidth || document.documentElement.clientWidth) &&
+          rect.right >= 0
+        );
+      }
+
+      function controlInViewVideos() {
+        contentVideos.forEach(function (video) {
+          if (!isElementPartiallyInViewport(video)) {
+            pauseVideo(video);
+          }
+        });
+      }
+
+      controlInViewVideos();
+      window.addEventListener("scroll", function () {
+        controlInViewVideos();
+      });
+
+      var objOptions = {
+        threshold: 0.1,
+        rootMargin: "0px"
+      };
+
+      var videoObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var video = entry.target;
+          if (entry.isIntersecting) {
+            playVideo(video);
+          } else {
+            pauseVideo(video);
+          }
+        });
+      }, objOptions);
+
+      contentVideos.forEach(function (video) {
+        videoObserver.observe(video);
+      });
+    });
+  </script>
+  <script>
+    window.ADADEX_COMPARE = {"bench": {"seen-01": {"reference": "./static/videos/compare/seen-01_reference.mp4", "maniptrans": "./static/videos/compare/seen-01_maniptrans.mp4", "simtoolreal": "./static/videos/compare/seen-01_simtoolreal.mp4", "adadex": "./static/videos/compare/seen-01_adadex.mp4"}, "seen-02": {"reference": "./static/videos/compare/seen-02_reference.mp4", "maniptrans": "./static/videos/compare/seen-02_maniptrans.mp4", "simtoolreal": "./static/videos/compare/seen-02_simtoolreal.mp4", "adadex": "./static/videos/compare/seen-02_adadex.mp4"}, "seen-03": {"reference": "./static/videos/compare/seen-03_reference.mp4", "maniptrans": "./static/videos/compare/seen-03_maniptrans.mp4", "simtoolreal": "./static/videos/compare/seen-03_simtoolreal.mp4", "adadex": "./static/videos/compare/seen-03_adadex.mp4"}, "seen-04": {"reference": "./static/videos/compare/seen-04_reference.mp4", "maniptrans": "./static/videos/compare/seen-04_maniptrans.mp4", "simtoolreal": "./static/videos/compare/seen-04_simtoolreal.mp4", "adadex": "./static/videos/compare/seen-04_adadex.mp4"}, "seen-05": {"reference": "./static/videos/compare/seen-05_reference.mp4", "maniptrans": "./static/videos/compare/seen-05_maniptrans.mp4", "simtoolreal": "./static/videos/compare/seen-05_simtoolreal.mp4", "adadex": "./static/videos/compare/seen-05_adadex.mp4"}, "seen-06": {"reference": "./static/videos/compare/seen-06_reference.mp4", "maniptrans": "./static/videos/compare/seen-06_maniptrans.mp4", "simtoolreal": "./static/videos/compare/seen-06_simtoolreal.mp4", "adadex": "./static/videos/compare/seen-06_adadex.mp4"}, "seen-07": {"reference": "./static/videos/compare/seen-07_reference.mp4", "maniptrans": "./static/videos/compare/seen-07_maniptrans.mp4", "simtoolreal": "./static/videos/compare/seen-07_simtoolreal.mp4", "adadex": "./static/videos/compare/seen-07_adadex.mp4"}, "seen-08": {"reference": "./static/videos/compare/seen-08_reference.mp4", "maniptrans": "./static/videos/compare/seen-08_maniptrans.mp4", "simtoolreal": "./static/videos/compare/seen-08_simtoolreal.mp4", "adadex": "./static/videos/compare/seen-08_adadex.mp4"}, "seen-09": {"reference": "./static/videos/compare/seen-09_reference.mp4", "maniptrans": "./static/videos/compare/seen-09_maniptrans.mp4", "simtoolreal": "./static/videos/compare/seen-09_simtoolreal.mp4", "adadex": "./static/videos/compare/seen-09_adadex.mp4"}, "seen-10": {"reference": "./static/videos/compare/seen-10_reference.mp4", "maniptrans": "./static/videos/compare/seen-10_maniptrans.mp4", "simtoolreal": "./static/videos/compare/seen-10_simtoolreal.mp4", "adadex": "./static/videos/compare/seen-10_adadex.mp4"}, "seen-11": {"reference": "./static/videos/compare/seen-11_reference.mp4", "maniptrans": "./static/videos/compare/seen-11_maniptrans.mp4", "simtoolreal": "./static/videos/compare/seen-11_simtoolreal.mp4", "adadex": "./static/videos/compare/seen-11_adadex.mp4"}, "seen-12": {"reference": "./static/videos/compare/seen-12_reference.mp4", "maniptrans": "./static/videos/compare/seen-12_maniptrans.mp4", "simtoolreal": "./static/videos/compare/seen-12_simtoolreal.mp4", "adadex": "./static/videos/compare/seen-12_adadex.mp4"}, "unseen-13": {"reference": "./static/videos/compare/unseen-13_reference.mp4", "maniptrans": "./static/videos/compare/unseen-13_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-13_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-13_adadex.mp4"}, "unseen-14": {"reference": "./static/videos/compare/unseen-14_reference.mp4", "maniptrans": "./static/videos/compare/unseen-14_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-14_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-14_adadex.mp4"}, "unseen-15": {"reference": "./static/videos/compare/unseen-15_reference.mp4", "maniptrans": "./static/videos/compare/unseen-15_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-15_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-15_adadex.mp4"}, "unseen-16": {"reference": "./static/videos/compare/unseen-16_reference.mp4", "maniptrans": "./static/videos/compare/unseen-16_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-16_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-16_adadex.mp4"}, "unseen-17": {"reference": "./static/videos/compare/unseen-17_reference.mp4", "maniptrans": "./static/videos/compare/unseen-17_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-17_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-17_adadex.mp4"}, "unseen-18": {"reference": "./static/videos/compare/unseen-18_reference.mp4", "maniptrans": "./static/videos/compare/unseen-18_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-18_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-18_adadex.mp4"}, "unseen-19": {"reference": "./static/videos/compare/unseen-19_reference.mp4", "maniptrans": "./static/videos/compare/unseen-19_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-19_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-19_adadex.mp4"}, "unseen-20": {"reference": "./static/videos/compare/unseen-20_reference.mp4", "maniptrans": "./static/videos/compare/unseen-20_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-20_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-20_adadex.mp4"}, "unseen-21": {"reference": "./static/videos/compare/unseen-21_reference.mp4", "maniptrans": "./static/videos/compare/unseen-21_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-21_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-21_adadex.mp4"}, "unseen-22": {"reference": "./static/videos/compare/unseen-22_reference.mp4", "maniptrans": "./static/videos/compare/unseen-22_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-22_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-22_adadex.mp4"}, "unseen-23": {"reference": "./static/videos/compare/unseen-23_reference.mp4", "maniptrans": "./static/videos/compare/unseen-23_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-23_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-23_adadex.mp4"}, "unseen-24": {"reference": "./static/videos/compare/unseen-24_reference.mp4", "maniptrans": "./static/videos/compare/unseen-24_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-24_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-24_adadex.mp4"}, "unseen-25": {"reference": "./static/videos/compare/unseen-25_reference.mp4", "maniptrans": "./static/videos/compare/unseen-25_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-25_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-25_adadex.mp4"}, "unseen-26": {"reference": "./static/videos/compare/unseen-26_reference.mp4", "maniptrans": "./static/videos/compare/unseen-26_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-26_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-26_adadex.mp4"}, "unseen-27": {"reference": "./static/videos/compare/unseen-27_reference.mp4", "maniptrans": "./static/videos/compare/unseen-27_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-27_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-27_adadex.mp4"}, "unseen-28": {"reference": "./static/videos/compare/unseen-28_reference.mp4", "maniptrans": "./static/videos/compare/unseen-28_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-28_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-28_adadex.mp4"}, "unseen-29": {"reference": "./static/videos/compare/unseen-29_reference.mp4", "maniptrans": "./static/videos/compare/unseen-29_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-29_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-29_adadex.mp4"}, "unseen-30": {"reference": "./static/videos/compare/unseen-30_reference.mp4", "maniptrans": "./static/videos/compare/unseen-30_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-30_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-30_adadex.mp4"}, "unseen-31": {"reference": "./static/videos/compare/unseen-31_reference.mp4", "maniptrans": "./static/videos/compare/unseen-31_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-31_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-31_adadex.mp4"}, "unseen-32": {"reference": "./static/videos/compare/unseen-32_reference.mp4", "maniptrans": "./static/videos/compare/unseen-32_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-32_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-32_adadex.mp4"}, "unseen-33": {"reference": "./static/videos/compare/unseen-33_reference.mp4", "maniptrans": "./static/videos/compare/unseen-33_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-33_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-33_adadex.mp4"}, "unseen-34": {"reference": "./static/videos/compare/unseen-34_reference.mp4", "maniptrans": "./static/videos/compare/unseen-34_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-34_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-34_adadex.mp4"}, "unseen-35": {"reference": "./static/videos/compare/unseen-35_reference.mp4", "maniptrans": "./static/videos/compare/unseen-35_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-35_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-35_adadex.mp4"}, "unseen-36": {"reference": "./static/videos/compare/unseen-36_reference.mp4", "maniptrans": "./static/videos/compare/unseen-36_maniptrans.mp4", "simtoolreal": "./static/videos/compare/unseen-36_simtoolreal.mp4", "adadex": "./static/videos/compare/unseen-36_adadex.mp4"}}, "s2s": {"s2s-alarmclock": {"isaacgym": "./static/videos/compare/seen-02_adadex.mp4", "mujoco": "./static/videos/sim2sim/s2s-alarmclock_mujoco.mp4"}, "s2s-bowl": {"isaacgym": "./static/videos/compare/seen-04_adadex.mp4", "mujoco": "./static/videos/sim2sim/s2s-bowl_mujoco.mp4"}, "s2s-cup": {"isaacgym": "./static/videos/compare/seen-05_adadex.mp4", "mujoco": "./static/videos/sim2sim/s2s-cup_mujoco.mp4"}, "s2s-fryingpan": {"isaacgym": "./static/videos/compare/seen-06_adadex.mp4", "mujoco": "./static/videos/sim2sim/s2s-fryingpan_mujoco.mp4"}, "s2s-hammer": {"isaacgym": "./static/videos/compare/seen-07_adadex.mp4", "mujoco": "./static/videos/sim2sim/s2s-hammer_mujoco.mp4"}, "s2s-hand": {"isaacgym": "./static/videos/compare/unseen-18_adadex.mp4", "mujoco": "./static/videos/sim2sim/s2s-hand_mujoco.mp4"}, "s2s-stamp": {"isaacgym": "./static/videos/compare/seen-09_adadex.mp4", "mujoco": "./static/videos/sim2sim/s2s-stamp_mujoco.mp4"}, "s2s-stapler": {"isaacgym": "./static/videos/compare/seen-10_adadex.mp4", "mujoco": "./static/videos/sim2sim/s2s-stapler_mujoco.mp4"}, "s2s-teapot": {"isaacgym": "./static/videos/compare/seen-11_adadex.mp4", "mujoco": "./static/videos/sim2sim/s2s-teapot_mujoco.mp4"}, "s2s-wineglass": {"isaacgym": "./static/videos/compare/seen-12_adadex.mp4", "mujoco": "./static/videos/sim2sim/s2s-wineglass_mujoco.mp4"}}, "r2s": {"bottle": {"raw": "./static/videos/real2sim/r2s-bottle_raw.mp4", "ours": "./static/videos/real2sim/r2s-bottle_ours.mp4", "doasido": "./static/videos/real2sim/r2s-bottle_doasido.mp4", "egoinfinity": "./static/videos/real2sim/r2s-bottle_egoinfinity.mp4"}, "box": {"raw": "./static/videos/real2sim/r2s-box_raw.mp4", "ours": "./static/videos/real2sim/r2s-box_ours.mp4", "doasido": "./static/videos/real2sim/r2s-box_doasido.mp4", "egoinfinity": "./static/videos/real2sim/r2s-box_egoinfinity.mp4"}}};
+  </script>
+  <script src="./static/js/compare.js"></script>
+</body>
+
+</html>

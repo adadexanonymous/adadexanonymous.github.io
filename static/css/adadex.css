@@ -1,0 +1,687 @@
+/* AdaDex additions on top of the base template: media placeholders, results tables. */
+
+.site-media .hero.video {
+  background: radial-gradient(ellipse at center, #1a2036 0%, #0f1424 70%);
+}
+
+.hero-anon-note {
+  margin-top: 1.2rem;
+  color: #d9def0;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+}
+
+/* Blank media slot. Replace the whole element with a <video> or <img> once assets are ready. */
+.media-placeholder {
+  display: flex;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  color: rgba(217, 222, 240, 0.62);
+  background: repeating-linear-gradient(135deg, #121729 0 14px, #151b2f 14px 28px);
+  border: 1px dashed rgba(165, 180, 252, 0.38);
+  border-radius: 8px;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.media-placeholder i {
+  font-size: 1.6rem;
+  opacity: 0.7;
+}
+
+.media-placeholder code {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  font-size: 0.72rem;
+  word-break: break-all;
+}
+
+.media-placeholder.is-hero {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  justify-content: flex-end;
+  padding-bottom: 2.5rem;
+  border: 0;
+  border-radius: 0;
+}
+
+.media-placeholder.is-figure {
+  aspect-ratio: 21 / 9;
+}
+
+.media-placeholder.is-light {
+  color: #6a7086;
+  background: repeating-linear-gradient(135deg, #fafbfd 0 14px, #eff1f7 14px 28px);
+  border-color: rgba(79, 70, 229, 0.5);
+}
+
+.motion-card .media-placeholder {
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+}
+
+.deployment-thumb .media-placeholder {
+  gap: 2px;
+  font-size: 0.7rem;
+  opacity: 0.72;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.deployment-thumb .media-placeholder i {
+  font-size: 1rem;
+}
+
+.deployment-thumb.is-active .media-placeholder,
+.deployment-thumb:hover .media-placeholder {
+  border-color: #a5b4fc;
+  opacity: 1;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 1.6rem;
+}
+
+.comparison-grid h4 {
+  margin-bottom: 0.5rem;
+  color: #eef1fa;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  text-align: center;
+}
+
+.comparison-grid h4.is-ours {
+  color: #a5b4fc;
+}
+
+.comparison-row-label {
+  margin: 0.4rem 0 0.8rem;
+  color: #d9def0;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+}
+
+/* Results tables */
+.results-table-wrap {
+  max-width: 980px;
+  margin: 0 auto 2.2rem;
+  overflow-x: auto;
+}
+
+.results-table-wrap h4.title {
+  margin-bottom: 0.8rem !important;
+  text-align: center;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  font-size: 0.95rem;
+}
+
+.results-table th,
+.results-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e1e4ee;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.results-table th:first-child,
+.results-table td:first-child {
+  text-align: left;
+}
+
+.results-table thead th {
+  border-bottom: 2px solid #20242a;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.results-table .group-row td {
+  color: #363c52;
+  background: #eceff8;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  text-align: center;
+}
+
+.results-table .ours td {
+  background: rgba(79, 70, 229, 0.09);
+}
+
+.results-table .best {
+  font-weight: 800;
+}
+
+.results-table .second {
+  text-decoration: underline;
+}
+
+.results-table .std {
+  color: #767c92;
+  font-size: 0.8em;
+}
+
+.results-caption {
+  margin-top: 0.6rem;
+  color: #565c72;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.link-block .button.is-coming-soon {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.link-block .button.is-coming-soon:hover {
+  background-color: #363636 !important;
+  border-color: transparent !important;
+}
+
+@media screen and (max-width: 768px) {
+  .comparison-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Comparison section sits on the light background. */
+.site-media #comparison {
+  color: #20242a;
+  background: #f5f6fb !important;
+  scroll-margin-top: 72px;
+}
+
+.site-media #comparison .subsection-description {
+  color: #363c52;
+  background: #ffffff;
+  border-color: rgba(79, 70, 229, 0.45);
+  box-shadow: none;
+}
+
+.results-table,
+.results-table th,
+.results-table td {
+  color: #20242a;
+}
+
+#comparison .comparison-grid h4 {
+  color: #20242a;
+}
+
+#comparison .comparison-grid h4.is-ours {
+  color: #4338ca;
+}
+
+/* Gallery layout per card family */
+.site-media #results,
+.site-media #downstream,
+.site-media #embodiments {
+  scroll-margin-top: 72px;
+}
+
+.motion-family-block[data-card-family="tracking"] .motion-card-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 760px;
+}
+
+.motion-family-block[data-card-family="generalization"] .motion-card-grid,
+.motion-family-block[data-card-family="embodiment"] .motion-card-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 960px;
+}
+
+/* Clips mix two-panel (policy | reference) and single-view layouts: show them whole. */
+.site-media .motion-card video {
+  object-fit: contain;
+  background: #0b0f1c;
+}
+
+.site-media .carousel-item video {
+  aspect-ratio: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.clip-caption {
+  margin-top: 6px;
+  color: #d9def0;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.panel-legend {
+  margin-top: 4px;
+  color: rgba(217, 222, 240, 0.75);
+  font-size: 0.88rem;
+}
+
+@media screen and (max-width: 768px) {
+  .motion-family-block[data-card-family] .motion-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.panel-legend strong {
+  color: #a5b4fc;
+}
+
+/* Blender-render layout */
+.site-media #benchmark,
+.site-media #beyond {
+  scroll-margin-top: 72px;
+}
+
+.motion-family-block[data-card-family="benchmark"] .motion-card-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 1080px;
+}
+
+.motion-family-block[data-card-family="versatility"] .motion-card-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.site-media .motion-card video,
+.site-media .carousel-item video,
+.site-media .wide-video,
+.compare-grid video {
+  background: #ffffff;
+}
+
+/* Comparison / sim-to-sim picker */
+.compare-picker {
+  max-width: 1100px;
+  margin: 0 auto 1.2rem;
+  text-align: center;
+}
+
+.compare-tabs {
+  display: inline-flex;
+  gap: 6px;
+  margin-bottom: 0.9rem;
+  padding: 4px;
+  background: #e2e5f1;
+  border-radius: 999px;
+}
+
+.compare-tab {
+  padding: 6px 16px;
+  color: #363c52;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+}
+
+.compare-tab.is-active {
+  color: #ffffff;
+  background: #20242a;
+}
+
+.compare-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.compare-chips.is-hidden {
+  display: none;
+}
+
+.compare-chip {
+  padding: 4px 12px;
+  color: #363c52;
+  background: #ffffff;
+  border: 1px solid #cdd2e4;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.compare-chip:hover {
+  border-color: #4f46e5;
+}
+
+.compare-chip.is-active {
+  color: #ffffff;
+  background: #4338ca;
+  border-color: #4338ca;
+}
+
+#deployment .compare-chip {
+  color: #d9def0;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(129, 140, 248, 0.3);
+}
+
+#deployment .compare-chip.is-active {
+  color: #0f1424;
+  background: #a5b4fc;
+}
+
+.compare-grid {
+  display: grid;
+  gap: 12px;
+  margin: 0 auto 2.4rem;
+}
+
+.compare-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.compare-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 1100px;
+}
+
+.compare-grid h4 {
+  margin-bottom: 0.4rem;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  text-align: center;
+}
+
+#comparison .compare-grid h4 {
+  color: #20242a;
+}
+
+#deployment .compare-grid h4 {
+  color: #eef1fa;
+}
+
+.compare-grid h4.is-ours,
+#comparison .compare-grid h4.is-ours {
+  color: #4338ca;
+}
+
+#deployment .compare-grid h4.is-ours {
+  color: #a5b4fc;
+}
+
+.compare-note {
+  font-weight: 400;
+  font-size: 0.8em;
+  opacity: 0.75;
+}
+
+.compare-grid video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid #d4d8e8;
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .compare-grid-4,
+  .compare-grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+#deployment .wide-video {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* Smooth in-page jumps; keep targets clear of the fixed nav bar. */
+html {
+  scroll-behavior: smooth;
+}
+
+.motion-card-detail,
+.bench-row {
+  scroll-margin-top: 84px;
+}
+
+.site-media #method {
+  scroll-margin-top: 72px;
+}
+
+/* GRAB benchmark: jump buttons + stacked rows */
+.jump-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto 2.2rem;
+}
+
+.jump-button {
+  padding: 10px 22px;
+  color: #eef1fa;
+  background: #222a44;
+  border: 1px solid rgba(129, 140, 248, 0.34);
+  border-radius: 999px;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.jump-button:hover,
+.jump-button:focus-visible {
+  color: #0f1424;
+  background: #a5b4fc;
+}
+
+.bench-row {
+  max-width: 1180px;
+  margin: 0 auto 3rem;
+}
+
+.bench-row .motion-card-detail-header {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.bench-row h3 {
+  color: #eef1fa;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.bench-row-desc {
+  margin-top: 4px;
+  color: #d9def0;
+}
+
+.site-media .hero.is-link .hero-title {
+  color: #a5b4fc !important;
+}
+
+.compare-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 1rem;
+}
+
+.compare-control {
+  padding: 7px 18px;
+  color: #ffffff;
+  background: #4f46e5;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  transition: background 0.2s ease;
+}
+
+.compare-control:hover,
+.compare-control:focus-visible {
+  background: #3730a3;
+}
+
+.compare-control[data-compare-action="stop"] {
+  color: #363c52;
+  background: #e2e5f1;
+}
+
+.compare-control[data-compare-action="stop"]:hover,
+.compare-control[data-compare-action="stop"]:focus-visible {
+  background: #cdd2e4;
+}
+
+/* Real-to-sim section */
+.site-media #real2sim {
+  scroll-margin-top: 72px;
+}
+
+.compare-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 1180px;
+}
+
+#real2sim .compare-grid h4,
+.r2s-sbs h4 {
+  color: #eef1fa;
+}
+
+#real2sim .compare-grid h4.is-ours {
+  color: #a5b4fc;
+}
+
+#real2sim .compare-grid .media-placeholder {
+  border-radius: 8px;
+}
+
+.r2s-sbs {
+  max-width: 980px;
+  margin: 0 auto 2.4rem;
+  text-align: center;
+}
+
+.r2s-sbs h4 {
+  margin-bottom: 0.2rem;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.r2s-sbs .wide-video {
+  margin-top: 0.8rem;
+}
+
+.r2s-figures figcaption {
+  color: #d9def0;
+}
+
+.r2s-figures .paper-figure {
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .compare-grid-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.r2s-figures figcaption strong {
+  color: #eef1fa;
+}
+
+/* Paper figures inside sections */
+.teaser-figure-section {
+  padding-top: 0 !important;
+  background: #f5f6fb;
+}
+
+.teaser-figure {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.section-figure {
+  max-width: 1080px;
+  margin: 0 auto 2.4rem;
+}
+
+.section-figure .paper-figure {
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.generated-motion-section .section-figure figcaption,
+#deployment .section-figure figcaption {
+  color: #d9def0;
+}
+
+/* Hero teaser mosaic: navy veil keeps the title readable over the white renders */
+.site-media .hero.video .overlay {
+  background: radial-gradient(ellipse at center, rgba(15, 20, 36, 0.78) 0%, rgba(15, 20, 36, 0.55) 45%, rgba(15, 20, 36, 0.35) 100%);
+}
+
+/* Bulma hides .hero-video on mobile; keep the teaser mosaic there too. */
+@media screen and (max-width: 768px) {
+  .site-media .hero-video {
+    display: block !important;
+  }
+}
+
+/* Kinematic reference clip in downstream carousels */
+.carousel-item.is-reference {
+  position: relative;
+}
+
+.reference-tag {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  padding: 3px 10px;
+  color: #0f1424;
+  background: #fbbf24;
+  border-radius: 999px;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.carousel-item.is-reference video {
+  outline: 2px dashed #fbbf24;
+  outline-offset: -2px;
+}
+
+.carousel-item.is-reference .clip-caption strong {
+  color: #fbbf24;
+}
+
+.carousel-item.is-reference video {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #ffffff;
+}
+
+.motion-family-block[data-card-family="embodiment"] .motion-card-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 1180px;
+}
+
+/* \method{} in the paper: bold small caps */
+.method-name {
+  font-variant: small-caps;
+  font-weight: 700;
+}
