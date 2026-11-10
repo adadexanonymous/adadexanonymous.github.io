@@ -335,7 +335,18 @@ body {
 
 /* Video Carousel */
 .video-carousel {
+  --carousel-control-size: 48px;
   position: relative;
+  display: grid;
+  grid-template-columns: var(--carousel-control-size) minmax(0, 1fr) var(--carousel-control-size);
+  align-items: center;
+  gap: 12px;
+}
+
+.carousel-viewport {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -365,14 +376,13 @@ body {
 
 .carousel-prev,
 .carousel-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  position: static;
+  grid-row: 1;
   background: rgba(0, 0, 0, 0.45);
   color: #fff;
   border: none;
-  width: 44px;
-  height: 44px;
+  width: var(--carousel-control-size);
+  height: var(--carousel-control-size);
   border-radius: 50%;
   font-size: 1.2rem;
   cursor: pointer;
@@ -400,14 +410,19 @@ body {
 }
 
 .carousel-prev {
-  left: 4px;
+  grid-column: 1;
 }
 
 .carousel-next {
-  right: 4px;
+  grid-column: 3;
 }
 
 @media screen and (max-width: 768px) {
+  .video-carousel {
+    --carousel-control-size: 44px;
+    gap: 8px;
+  }
+
   .carousel-item {
     flex: 0 0 100%;
   }
@@ -426,8 +441,6 @@ body {
 
   .carousel-prev,
   .carousel-next {
-    width: 36px;
-    height: 36px;
     font-size: 1rem;
   }
 }
@@ -471,18 +484,23 @@ body {
 
 .affiliation-logos {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 40px;
   margin: 18px 0 8px;
 }
 
-.affiliation-logos img:first-child {
-  width: 220px;
+.affiliation-logo {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 4px;
 }
 
-.affiliation-logos img:last-child {
-  width: 180px;
+.affiliation-logo img {
+  display: block;
+  height: 44px;
+  width: auto;
 }
 
 .section {
@@ -596,14 +614,6 @@ body {
   background: #3730a3;
 }
 
-.carousel-prev {
-  left: 8px;
-}
-
-.carousel-next {
-  right: 8px;
-}
-
 .wide-video,
 .paper-figure {
   display: block;
@@ -671,12 +681,8 @@ body {
     margin-top: 14px;
   }
 
-  .affiliation-logos img:first-child {
-    width: 160px;
-  }
-
-  .affiliation-logos img:last-child {
-    width: 132px;
+  .affiliation-logo img {
+    height: 24px;
   }
 
   .section {

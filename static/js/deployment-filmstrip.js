@@ -38,25 +38,33 @@ document.addEventListener('DOMContentLoaded', function () {
     var prev = document.createElement('button');
     prev.className = 'deployment-thumb-scroll deployment-thumb-scroll-prev';
     prev.type = 'button';
-    prev.setAttribute('aria-label', 'Previous trials');
-    prev.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>';
+    prev.setAttribute('aria-label', 'Scroll to previous rollouts');
+    prev.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"></path></svg>';
 
     var next = document.createElement('button');
     next.className = 'deployment-thumb-scroll deployment-thumb-scroll-next';
     next.type = 'button';
-    next.setAttribute('aria-label', 'Next trials');
-    next.innerHTML = '<i class="fas fa-chevron-right" aria-hidden="true"></i>';
+    next.setAttribute('aria-label', 'Scroll to next rollouts');
+    next.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg>';
 
     strip.parentNode.insertBefore(wrap, strip);
     wrap.appendChild(prev);
     wrap.appendChild(strip);
     wrap.appendChild(next);
 
+    var thumbnailVideo = strip.querySelector('.deployment-thumb video');
+
     function updateScrollButtons() {
       var maxScroll = Math.max(0, strip.scrollWidth - strip.clientWidth);
       prev.disabled = strip.scrollLeft <= 1;
       next.disabled = strip.scrollLeft >= maxScroll - 1;
       wrap.classList.toggle('is-scrollable', maxScroll > 1);
+      if (thumbnailVideo) {
+        var thumbnailHeight = thumbnailVideo.getBoundingClientRect().height;
+        if (thumbnailHeight > 0) {
+          wrap.style.setProperty('--rollout-thumbnail-height', thumbnailHeight + 'px');
+        }
+      }
     }
 
     function scrollByPage(direction) {
@@ -76,6 +84,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     strip.addEventListener('scroll', updateScrollButtons);
     window.addEventListener('resize', updateScrollButtons);
+    if (thumbnailVideo && window.ResizeObserver) {
+      var thumbnailObserver = new ResizeObserver(updateScrollButtons);
+      thumbnailObserver.observe(thumbnailVideo);
+    }
     updateScrollButtons();
     setTimeout(updateScrollButtons, 250);
   });

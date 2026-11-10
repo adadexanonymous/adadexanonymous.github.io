@@ -181,13 +181,20 @@
   text-align: center;
 }
 
+.comparison-tracking-figure {
+  max-width: 800px;
+  margin-top: 4rem;
+}
+
 .link-block .button.is-coming-soon {
   cursor: default;
-  opacity: 0.6;
+  background-color: #e2e4e8;
+  border-color: transparent;
+  color: #6b7280;
 }
 
 .link-block .button.is-coming-soon:hover {
-  background-color: #363636 !important;
+  background-color: #e2e4e8 !important;
   border-color: transparent !important;
 }
 
@@ -255,6 +262,23 @@
   object-fit: contain;
 }
 
+.clip-caption,
+.motion-card-body h3,
+.motion-card-body > p,
+.r2s-sbs h4,
+.r2s-sbs .panel-legend,
+.deployment-block > h3,
+.deployment-block > .subsection-description {
+  position: relative;
+  z-index: 1;
+}
+
+.motion-card-body h3,
+.r2s-sbs h4,
+.deployment-block > h3 {
+  z-index: 2;
+}
+
 .clip-caption {
   margin-top: 6px;
   color: #d9def0;
@@ -291,7 +315,33 @@
 }
 
 .motion-family-block[data-card-family="versatility"] .motion-card-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.motion-family-block[data-card-family="versatility"] .motion-card {
+  flex: 0 0 calc((100% - 48px) / 4);
+}
+
+.motion-gallery-hint {
+  color: var(--media-muted);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.agentic-planner-name {
+  color: var(--accent-green-bright);
+}
+
+.motion-family-block-header h3 code,
+.motion-family-block-header .subsection-description code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95em;
+  font-weight: inherit;
+  color: inherit;
+  background: transparent;
+  padding: 0;
 }
 
 .site-media .motion-card video,
@@ -440,12 +490,28 @@
   margin: 0 auto;
 }
 
+#deployment .deployment-speed {
+  color: var(--accent-green-bright);
+  font-weight: 800;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+#deployment .closed-loop-label {
+  color: var(--accent-green-bright);
+  font-weight: 900;
+  -webkit-text-stroke: 0.25px currentColor;
+}
+
 /* Smooth in-page jumps; keep targets clear of the fixed nav bar. */
 html {
   scroll-behavior: smooth;
 }
 
-.motion-card-detail,
+.motion-card-detail {
+  scroll-margin-top: 96px;
+}
+
 .bench-row {
   scroll-margin-top: 84px;
 }
@@ -678,6 +744,26 @@ html {
 .motion-family-block[data-card-family="embodiment"] .motion-card-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   max-width: 1180px;
+}
+
+@media screen and (max-width: 960px) {
+  .motion-family-block[data-card-family="versatility"] .motion-card {
+    flex-basis: calc((100% - 16px) / 2);
+  }
+
+  .motion-family-block[data-card-family="embodiment"] .motion-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .motion-family-block[data-card-family="versatility"] .motion-card {
+    flex-basis: 100%;
+  }
+
+  .motion-family-block[data-card-family="embodiment"] .motion-card-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* \method{} in the paper: bold small caps */

@@ -17,9 +17,8 @@
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="stylesheet" href="./static/css/generated-motion-variants.css">
   <link rel="stylesheet" href="./static/css/media-theme.css">
-  <link rel="stylesheet" href="./static/css/adadex.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="./static/css/adadex.css?v=closed-loop-bold-4">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
@@ -29,7 +28,7 @@
 
   <meta property="og:title" content="AdaDex: Learning Adaptable Dexterous Skills via Hybrid Dexterous Mimicking" />
   <meta property="og:description"
-    content="Anonymous submission. A goal-conditioned RL framework that turns seconds of human motion into adaptable dexterous skills." />
+    content="A goal-conditioned RL framework that turns seconds of human motion into adaptable dexterous skills." />
 
   <style>
     .hidden_videos {
@@ -39,11 +38,9 @@
 </head>
 
 <body class="site-media">
-  <section class="hero is-link video" style="position:relative; height: 56.25vw; min-height: 100vh;">
-    <div class="hero-video"
-      style="position: absolute; left: 50%; top: 0; transform: translateX(-50%); height: 100%; width: 177.77777778vh; min-width: 100%;">
-      <video playsinline autoplay muted loop preload="auto" poster="./static/images/teaser_poster.jpg"
-        style="width: 100%; height: 100%; object-position: center center; object-fit: cover;">
+  <section class="hero is-link video" id="top">
+    <div class="hero-video">
+      <video playsinline autoplay muted loop preload="auto" poster="./static/images/teaser_poster.jpg">
         <source src="./static/videos/teaser.mp4" type="video/mp4">
       </video>
     </div>
@@ -52,12 +49,15 @@
       <header class="navbar">
         <div class="container">
           <nav class="site-section-nav" aria-label="Section navigation">
-            <a class="navbar-item" href="#abstract">Abstract</a>
-            <a class="navbar-item" href="#beyond">Downstream</a>
-            <a class="navbar-item" href="#real2sim">Real-to-Sim</a>
-            <a class="navbar-item" href="#method">Method</a>
-            <a class="navbar-item" href="#comparison">Comparison</a>
-            <a class="navbar-item" href="#deployment">Sim-to-Real</a>
+            <a class="navbar-item site-brand" href="#top" aria-label="AdaDex — back to top">AdaDex</a>
+            <div class="site-nav-links">
+              <a class="navbar-item" href="#abstract">Abstract</a>
+              <a class="navbar-item" href="#beyond">Downstream</a>
+              <a class="navbar-item" href="#real2sim">Real-to-Sim</a>
+              <a class="navbar-item" href="#method">Method</a>
+              <a class="navbar-item" href="#comparison">Comparison</a>
+              <a class="navbar-item" href="#deployment">Sim-to-Real</a>
+            </div>
           </nav>
         </div>
       </header>
@@ -110,8 +110,6 @@
               human-like behavior from a single clip but cannot deviate from it. We present <strong class="method-name">AdaDex</strong>, a goal-conditioned
               RL framework that turns a single hand-object trajectory of a few seconds&mdash;from mocap data or HOI
               reconstruction from in-the-wild RGB(D) video&mdash;into an adaptable dexterous skill.
-            </p>
-            <p>
               At the core of <strong class="method-name">AdaDex</strong> is <strong>Hybrid Dexterous Mimicking</strong>: a shared policy is trained on two
               populations of massively parallel environments: motion tracking environments trained with dense motion
               tracking objective, which instill the human prior from human motion; and generalization environments
@@ -135,11 +133,11 @@
             <h2 class="title is-2 section-title-accent">Downstream Tasks</h2>
           </div>
           <p class="subsection-description">
-            The same recipe learns from in-the-wild video, drives downstream tasks from new goal sequences, and transfers across robot hands.
+            <strong class="agentic-planner-name">AdaDex</strong> learns adaptable dexterous skills <strong class="agentic-planner-name">from seconds of human motion</strong> from mocap or in-the-wild videos, drives downstream tasks from new goal sequences, and transfers across robot hands.
           </p>
           <figure class="method-figure section-figure">
             <img class="paper-figure" src="./static/images/downstream_gallery.jpg" alt="AdaDex skills across robot hands" />
-            <figcaption>AdaDex learns functional grasping, in-hand reorientation, and dynamic throw-and-catch, achieves
+            <figcaption>From seconds of human motion, AdaDex learns functional grasping, object reposing, in-hand reorientation, and dynamic throw-and-catch, achieves
               various downstream tasks, and works across robot hand embodiments (Arti-MANO, XHand, Wuji, Sharpa, and
               XHand + xArm).</figcaption>
           </figure>
@@ -147,10 +145,13 @@
           <div class="motion-card-gallery motion-card-gallery-blocks">
             <section class="motion-family-block" data-card-family="versatility">
               <div class="motion-family-block-header">
-                <h3>Versatile Dexterous Skills</h3>
+                <h3>Versatile Dexterous <code>\Skills</code></h3>
                 <p class="subsection-description">
-                  Skills learned from seconds of human motion, driven by new sequences of wrist and object goals.
+                  <strong class="agentic-planner-name">AdaDex</strong> learns adaptable dexterous <code>\skills</code> <strong class="agentic-planner-name">from seconds of human motion</strong>.
+                  Coding agents (e.g., <strong class="agentic-planner-name">Codex w/ GPT-6 Astra</strong>) generate plans as sequences
+                  of wrist and object pose waypoints for these <code>\skills</code> to execute in downstream tasks.
                 </p>
+                <p class="motion-gallery-hint">Click &ldquo;View examples&rdquo; on a skill card to see its videos below. Choose another card to explore different examples.</p>
               </div>
 
               <div class="motion-card-grid">
@@ -218,18 +219,20 @@
                     <h3>Pen spin &amp; pickup</h3>
                   </div>
                   <div class="video-carousel" data-per-view="2">
-                    <div class="carousel-track">
-                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/pen-spin_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_01.mp4"></video><p class="clip-caption">XHand &middot; marker spin</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_02.mp4"></video><p class="clip-caption">XHand &middot; marker spin</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_03.mp4"></video><p class="clip-caption">Wuji &middot; pick up &amp; roll</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_04.mp4"></video><p class="clip-caption">ArtiMANO &middot; pick up &amp; roll</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_05.mp4"></video><p class="clip-caption">Sharpa &middot; pick up &amp; roll</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_06.mp4"></video><p class="clip-caption">Wuji &middot; pick up &amp; roll</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_07.mp4"></video><p class="clip-caption">ArtiMANO &middot; marker spin</p></div>
+                    <div class="carousel-viewport">
+                      <div class="carousel-track">
+                        <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/pen-spin_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_01.mp4"></video><p class="clip-caption">XHand &middot; marker spin</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_02.mp4"></video><p class="clip-caption">XHand &middot; marker spin</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_03.mp4"></video><p class="clip-caption">Wuji &middot; pick up &amp; roll</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_04.mp4"></video><p class="clip-caption">ArtiMANO &middot; pick up &amp; roll</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_05.mp4"></video><p class="clip-caption">Sharpa &middot; pick up &amp; roll</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_06.mp4"></video><p class="clip-caption">Wuji &middot; pick up &amp; roll</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pen-spin/pen-spin_07.mp4"></video><p class="clip-caption">ArtiMANO &middot; marker spin</p></div>
+                      </div>
                     </div>
-                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-prev disabled" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"></path></svg></button>
+                    <button class="carousel-next" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg></button>
                   </div>
                 </div>
                 <div class="motion-card-detail" id="cards-aprilcube">
@@ -237,14 +240,16 @@
                     <h3>Throw, catch &amp; reorient</h3>
                   </div>
                   <div class="video-carousel" data-per-view="2">
-                    <div class="carousel-track">
-                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/aprilcube_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/aprilcube/aprilcube_x01.mp4"></video><p class="clip-caption">XHand &middot; reorient, throw &amp; catch</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/aprilcube/aprilcube_01.mp4"></video><p class="clip-caption">Throw &amp; catch &middot; XHand</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/aprilcube/aprilcube_02.mp4"></video><p class="clip-caption">Pick up &amp; reorient &middot; XHand</p></div>
+                    <div class="carousel-viewport">
+                      <div class="carousel-track">
+                        <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/aprilcube_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/aprilcube/aprilcube_x01.mp4"></video><p class="clip-caption">XHand &middot; reorient, throw &amp; catch</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/aprilcube/aprilcube_01.mp4"></video><p class="clip-caption">XHand &middot; Throw &amp; catch</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/aprilcube/aprilcube_02.mp4"></video><p class="clip-caption">XHand &middot; Pick up &amp; reorient</p></div>
+                      </div>
                     </div>
-                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-prev disabled" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"></path></svg></button>
+                    <button class="carousel-next" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg></button>
                   </div>
                 </div>
                 <div class="motion-card-detail" id="cards-writing">
@@ -252,14 +257,16 @@
                     <h3>Writing</h3>
                   </div>
                   <div class="video-carousel" data-per-view="2">
-                    <div class="carousel-track">
-                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/writing_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/writing/writing_01.mp4"></video><p class="clip-caption">Wuji &middot; writing</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/writing/writing_02.mp4"></video><p class="clip-caption">ArtiMANO &middot; writing</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/writing/writing_03.mp4"></video><p class="clip-caption">ArtiMANO &middot; writing</p></div>
+                    <div class="carousel-viewport">
+                      <div class="carousel-track">
+                        <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/writing_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/writing/writing_01.mp4"></video><p class="clip-caption">Wuji &middot; writing</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/writing/writing_02.mp4"></video><p class="clip-caption">ArtiMANO &middot; writing</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/writing/writing_03.mp4"></video><p class="clip-caption">ArtiMANO &middot; writing</p></div>
+                      </div>
                     </div>
-                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-prev disabled" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"></path></svg></button>
+                    <button class="carousel-next" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg></button>
                   </div>
                 </div>
                 <div class="motion-card-detail" id="cards-pan-toss">
@@ -267,17 +274,19 @@
                     <h3>Pan toss</h3>
                   </div>
                   <div class="video-carousel" data-per-view="2">
-                    <div class="carousel-track">
-                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/pan-toss_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_01.mp4"></video><p class="clip-caption">Sharpa &middot; pan toss</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_02.mp4"></video><p class="clip-caption">Wuji &middot; pan toss</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_03.mp4"></video><p class="clip-caption">XHand &middot; pan toss</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_04.mp4"></video><p class="clip-caption">ArtiMANO &middot; pan toss</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_05.mp4"></video><p class="clip-caption">Sharpa &middot; pan toss</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_06.mp4"></video><p class="clip-caption">Wuji &middot; pan toss</p></div>
+                    <div class="carousel-viewport">
+                      <div class="carousel-track">
+                        <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/pan-toss_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_01.mp4"></video><p class="clip-caption">Sharpa &middot; pan toss</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_02.mp4"></video><p class="clip-caption">Wuji &middot; pan toss</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_03.mp4"></video><p class="clip-caption">XHand &middot; pan toss</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_04.mp4"></video><p class="clip-caption">ArtiMANO &middot; pan toss</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_05.mp4"></video><p class="clip-caption">Sharpa &middot; pan toss</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pan-toss/pan-toss_06.mp4"></video><p class="clip-caption">Wuji &middot; pan toss</p></div>
+                      </div>
                     </div>
-                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-prev disabled" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"></path></svg></button>
+                    <button class="carousel-next" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg></button>
                   </div>
                 </div>
                 <div class="motion-card-detail" id="cards-hammering">
@@ -285,17 +294,19 @@
                     <h3>Hammering</h3>
                   </div>
                   <div class="video-carousel" data-per-view="2">
-                    <div class="carousel-track">
-                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/hammering_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_01.mp4"></video><p class="clip-caption">Sharpa &middot; hammering</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_02.mp4"></video><p class="clip-caption">Wuji &middot; hammering</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_03.mp4"></video><p class="clip-caption">XHand &middot; hammering</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_04.mp4"></video><p class="clip-caption">ArtiMANO &middot; hammering</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_05.mp4"></video><p class="clip-caption">Sharpa &middot; hammering</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_06.mp4"></video><p class="clip-caption">Wuji &middot; hammering</p></div>
+                    <div class="carousel-viewport">
+                      <div class="carousel-track">
+                        <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/hammering_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_01.mp4"></video><p class="clip-caption">Sharpa &middot; hammering</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_02.mp4"></video><p class="clip-caption">Wuji &middot; hammering</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_03.mp4"></video><p class="clip-caption">XHand &middot; hammering</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_04.mp4"></video><p class="clip-caption">ArtiMANO &middot; hammering</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_05.mp4"></video><p class="clip-caption">Sharpa &middot; hammering</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hammering/hammering_06.mp4"></video><p class="clip-caption">Wuji &middot; hammering</p></div>
+                      </div>
                     </div>
-                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-prev disabled" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"></path></svg></button>
+                    <button class="carousel-next" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg></button>
                   </div>
                 </div>
                 <div class="motion-card-detail" id="cards-pouring">
@@ -303,17 +314,19 @@
                     <h3>Pouring</h3>
                   </div>
                   <div class="video-carousel" data-per-view="2">
-                    <div class="carousel-track">
-                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/pouring_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_01.mp4"></video><p class="clip-caption">Wuji &middot; pouring</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_02.mp4"></video><p class="clip-caption">Sharpa &middot; pouring</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_03.mp4"></video><p class="clip-caption">XHand &middot; pouring</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_04.mp4"></video><p class="clip-caption">Sharpa &middot; pouring</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_05.mp4"></video><p class="clip-caption">Wuji &middot; pouring</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_06.mp4"></video><p class="clip-caption">XHand &middot; pouring</p></div>
+                    <div class="carousel-viewport">
+                      <div class="carousel-track">
+                        <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/pouring_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_01.mp4"></video><p class="clip-caption">Wuji &middot; pouring</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_02.mp4"></video><p class="clip-caption">Sharpa &middot; pouring</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_03.mp4"></video><p class="clip-caption">XHand &middot; pouring</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_04.mp4"></video><p class="clip-caption">Sharpa &middot; pouring</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_05.mp4"></video><p class="clip-caption">Wuji &middot; pouring</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/pouring/pouring_06.mp4"></video><p class="clip-caption">XHand &middot; pouring</p></div>
+                      </div>
                     </div>
-                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-prev disabled" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"></path></svg></button>
+                    <button class="carousel-next" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg></button>
                   </div>
                 </div>
                 <div class="motion-card-detail" id="cards-sweeping">
@@ -321,13 +334,15 @@
                     <h3>Sweeping</h3>
                   </div>
                   <div class="video-carousel" data-per-view="2">
-                    <div class="carousel-track">
-                      <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/sweeping_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/sweeping/sweeping_01.mp4"></video><p class="clip-caption">ArtiMANO &middot; sweeping</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/sweeping/sweeping_02.mp4"></video><p class="clip-caption">ArtiMANO &middot; sweeping</p></div>
+                    <div class="carousel-viewport">
+                      <div class="carousel-track">
+                        <div class="carousel-item is-reference"><video muted loop playsinline controls preload="metadata" src="./static/videos/references/sweeping_reference.mp4"></video><p class="clip-caption"><strong>Kinematic reference</strong>: the human demonstration this skill was learned from (human hand and object motion), shown for reference only, not a policy rollout</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/sweeping/sweeping_01.mp4"></video><p class="clip-caption">ArtiMANO &middot; sweeping</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/sweeping/sweeping_02.mp4"></video><p class="clip-caption">ArtiMANO &middot; sweeping</p></div>
+                      </div>
                     </div>
-                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-prev disabled" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"></path></svg></button>
+                    <button class="carousel-next" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg></button>
                   </div>
                 </div>
               </div>
@@ -339,6 +354,7 @@
                 <p class="subsection-description">
                   Human references are retargeted to different dexterous hands and learned without changing the method.
                 </p>
+                <p class="motion-gallery-hint">Click &ldquo;View examples&rdquo; on a hand card to see its videos below. Choose another card to explore different examples.</p>
               </div>
 
               <div class="motion-card-grid">
@@ -382,17 +398,19 @@
                     <h3>ArtiMANO</h3>
                   </div>
                   <div class="video-carousel" data-per-view="2">
-                    <div class="carousel-track">
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_01.mp4"></video><p class="clip-caption">Mug &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_02.mp4"></video><p class="clip-caption">Mug &middot; noisy goals</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_03.mp4"></video><p class="clip-caption">Pen &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_04.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_05.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_06.mp4"></video><p class="clip-caption">Frying pan &middot; cook &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_07.mp4"></video><p class="clip-caption">Hammer &middot; use &middot; tracking</p></div>
+                    <div class="carousel-viewport">
+                      <div class="carousel-track">
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_01.mp4"></video><p class="clip-caption">Mug &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_02.mp4"></video><p class="clip-caption">Mug &middot; noisy goals</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_03.mp4"></video><p class="clip-caption">Pen &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_04.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_05.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_06.mp4"></video><p class="clip-caption">Frying pan &middot; cook &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-artimano/hand-artimano_07.mp4"></video><p class="clip-caption">Hammer &middot; use &middot; tracking</p></div>
+                      </div>
                     </div>
-                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-prev disabled" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"></path></svg></button>
+                    <button class="carousel-next" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg></button>
                   </div>
                 </div>
                 <div class="motion-card-detail" id="cards-hand-xhand">
@@ -400,15 +418,17 @@
                     <h3>XHand</h3>
                   </div>
                   <div class="video-carousel" data-per-view="2">
-                    <div class="carousel-track">
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_01.mp4"></video><p class="clip-caption">Mug &middot; noisy goals</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_02.mp4"></video><p class="clip-caption">Frying pan &middot; cook &middot; noisy goals</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_03.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_04.mp4"></video><p class="clip-caption">Hammer &middot; use &middot; noisy goals</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_05.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                    <div class="carousel-viewport">
+                      <div class="carousel-track">
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_01.mp4"></video><p class="clip-caption">Mug &middot; noisy goals</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_02.mp4"></video><p class="clip-caption">Frying pan &middot; cook &middot; noisy goals</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_03.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_04.mp4"></video><p class="clip-caption">Hammer &middot; use &middot; noisy goals</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-xhand/hand-xhand_05.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                      </div>
                     </div>
-                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-prev disabled" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"></path></svg></button>
+                    <button class="carousel-next" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg></button>
                   </div>
                 </div>
                 <div class="motion-card-detail" id="cards-hand-sharpa">
@@ -416,16 +436,18 @@
                     <h3>Sharpa</h3>
                   </div>
                   <div class="video-carousel" data-per-view="2">
-                    <div class="carousel-track">
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_01.mp4"></video><p class="clip-caption">Mug &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_02.mp4"></video><p class="clip-caption">Mug &middot; noisy goals</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_03.mp4"></video><p class="clip-caption">Pen &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_04.mp4"></video><p class="clip-caption">Pen &middot; noisy goals</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_05.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_06.mp4"></video><p class="clip-caption">Frying pan &middot; cook &middot; noisy goals</p></div>
+                    <div class="carousel-viewport">
+                      <div class="carousel-track">
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_01.mp4"></video><p class="clip-caption">Mug &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_02.mp4"></video><p class="clip-caption">Mug &middot; noisy goals</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_03.mp4"></video><p class="clip-caption">Pen &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_04.mp4"></video><p class="clip-caption">Pen &middot; noisy goals</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_05.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-sharpa/hand-sharpa_06.mp4"></video><p class="clip-caption">Frying pan &middot; cook &middot; noisy goals</p></div>
+                      </div>
                     </div>
-                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-prev disabled" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"></path></svg></button>
+                    <button class="carousel-next" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg></button>
                   </div>
                 </div>
                 <div class="motion-card-detail" id="cards-hand-wuji">
@@ -433,16 +455,18 @@
                     <h3>Wuji</h3>
                   </div>
                   <div class="video-carousel" data-per-view="2">
-                    <div class="carousel-track">
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_01.mp4"></video><p class="clip-caption">Mug &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_02.mp4"></video><p class="clip-caption">Mug &middot; noisy goals</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_03.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_04.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_05.mp4"></video><p class="clip-caption">Frying pan &middot; cook &middot; tracking</p></div>
-                      <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_06.mp4"></video><p class="clip-caption">Hammer &middot; use &middot; tracking</p></div>
+                    <div class="carousel-viewport">
+                      <div class="carousel-track">
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_01.mp4"></video><p class="clip-caption">Mug &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_02.mp4"></video><p class="clip-caption">Mug &middot; noisy goals</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_03.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_04.mp4"></video><p class="clip-caption">Marker &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_05.mp4"></video><p class="clip-caption">Frying pan &middot; cook &middot; tracking</p></div>
+                        <div class="carousel-item"><video muted loop playsinline controls preload="metadata" src="./static/videos/hand-wuji/hand-wuji_06.mp4"></video><p class="clip-caption">Hammer &middot; use &middot; tracking</p></div>
+                      </div>
                     </div>
-                    <button class="carousel-prev disabled"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-prev disabled" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"></path></svg></button>
+                    <button class="carousel-next" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg></button>
                   </div>
                 </div>
               </div>
@@ -458,7 +482,7 @@
       <div class="columns is-centered">
         <div class="column is-full-width">
           <div style="text-align: center;">
-            <h2 class="title is-2 section-title-accent">Real-to-Sim from Casual Video</h2>
+            <h2 class="title is-2 section-title-accent">Real-to-Sim from Casual Videos</h2>
           </div>
           <p class="subsection-description">
             A few seconds of casual RGB-D video become a simulation-ready hand-object reference, which AdaDex turns into
@@ -488,10 +512,9 @@
           </div>
 
           <div class="r2s-baselines">
-            <h3 class="title is-3">Reconstruction vs. Baselines</h3>
+            <h3 class="title is-3">Our Reconstruction vs. Baselines</h3>
             <p class="subsection-description">
-              HOI reconstruction from the same casual RGB-D video with our pipeline, Do-As-I-Do, and EgoInfinity.
-              Background details in the raw videos are blurred for anonymity.
+              HOI reconstruction from the same casual RGB-D video with our pipeline, Do-As-I-Do, and EgoInfinity. We achieve <strong class="agentic-planner-name">better reconstruction quality</strong> and <strong class="agentic-planner-name">less runtime</strong>.
             </p>
             <div class="compare-picker">
               <div class="compare-chips">
@@ -573,8 +596,7 @@
             <button class="compare-chip" type="button" data-compare-group="bench" data-key="seen-12">Wine glass &middot; drink</button>
         </div>
         <div class="compare-chips is-hidden" data-split-panel="unseen">
-            <button class="compare-chip is-active" type="button" data-compare-group="bench" data-key="unseen-13">Airplane &middot; fly 1</button>
-            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-14">Apple &middot; eat 1</button>
+            <button class="compare-chip is-active" type="button" data-compare-group="bench" data-key="unseen-14">Apple &middot; eat 1</button>
             <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-15">Cup &middot; drink</button>
             <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-16">Hammer &middot; use 1</button>
             <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-17">Hammer &middot; use 2</button>
@@ -593,6 +615,7 @@
             <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-30">Bowl &middot; pass</button>
             <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-31">Toy hand &middot; inspect 2</button>
             <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-32">Wine glass &middot; toast 2</button>
+            <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-13">Airplane &middot; fly 1</button>
             <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-33">Airplane &middot; fly 2</button>
             <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-34">Bowl &middot; drink</button>
             <button class="compare-chip" type="button" data-compare-group="bench" data-key="unseen-35">Stapler &middot; staple 2</button>
@@ -666,6 +689,14 @@
           percentage of goals reached; SR is the percentage of rollouts reaching all 10.</p>
       </div>
 
+      <figure class="method-figure comparison-tracking-figure">
+        <h4 class="title is-4 has-text-centered">Tracking real-to-sim motions</h4>
+        <img class="paper-figure" src="./static/images/real2sim_tracking.png" width="1188" height="516" loading="lazy"
+          alt="Tracking progress across real-to-sim motions: ManipTrans averages 31.70%, while AdaDex averages 80.53%. Violin plots show the distributions, with mean, median, and interquartile range markers." />
+        <figcaption>Tracking progress on nine real-to-sim hand-object motions reconstructed from in-the-wild video.
+          AdaDex achieves <strong>80.53%</strong> mean tracking progress, compared with <strong>31.70%</strong> for ManipTrans.</figcaption>
+      </figure>
+
       </div>
     </div>
   </section>
@@ -678,22 +709,20 @@
             <h2 class="title is-2 section-title-accent">Sim-to-Sim and Sim-to-Real Transfer</h2>
           </div>
           <p class="subsection-description">
-            Policies trained in Isaac Gym transfer to MuJoCo without retraining. In the real world we test three GRAB
-            motions (apple, hammer, cup) and two real-to-sim motions (sweep, AprilCube), open-loop replaying the joint
-            targets generated by the policy at 1x speed (30&nbsp;Hz) so the real-time dynamics are preserved.
+            Here, we demonstrate the transfer of our policies across simulators and to the real world.
           </p>
 
           <figure class="method-figure section-figure">
             <img class="paper-figure" src="./static/images/sim2real.jpg" alt="Sim-to-sim and sim-to-real transfer" />
-            <figcaption>Closed-loop sim-to-sim transfer and open-loop sim-to-real rollouts streamed in real time (1x
-              speed, 30&nbsp;Hz): functional grasping of a thin hammer, pouring from a cup, in-hand gait switching of a
+            <figcaption>Sim-to-sim and sim-to-real transfer, in real time at
+              <strong class="deployment-speed">1x speed (30&nbsp;Hz)</strong>: functional grasping of a thin hammer, pouring from a cup, in-hand gait switching of a
               sweep, and in-hand reorientation of a cube.</figcaption>
           </figure>
 
           <div class="deployment-block">
             <h3 class="title is-3">Sim-to-Sim Transfer</h3>
             <p class="subsection-description">
-              The same policy on each GRAB benchmark motion, rolled out in Isaac Gym and transferred zero-shot to MuJoCo without retraining.
+              The same policy on each GRAB benchmark motion, rolled out in Isaac Gym and transferred to MuJoCo, <strong class="deployment-speed">zero-shot and closed-loop</strong>, without retraining.
             </p>
             <div class="compare-picker">
               <div class="compare-chips">
@@ -730,46 +759,50 @@
           <div class="deployment-block">
             <h3 class="title is-3">Real-World Rollouts</h3>
             <p class="subsection-description">
-              Open-loop real-world rollouts: the joint targets generated by the policy in simulation, replayed on the real arm-hand system at 1x speed (30&nbsp;Hz). Pick a rollout below.
+              <strong class="deployment-speed">Open-loop</strong> and <strong class="deployment-speed">closed-loop</strong> real-world rollouts: the joint targets generated by the policy are directly passed to the real arm-hand system at <strong class="deployment-speed">1x speed (30&nbsp;Hz)</strong>, preserving real-time dynamics.<br>Videos played in 1x. Pick a rollout below.
             </p>
 
             <div class="deployment-layout deployment-layout-filmstrip">
               <section class="deployment-feature-task" data-feature-group="real">
                 <div class="deployment-feature-stage">
-                  <video id="real-feature" class="deployment-feature-video" muted loop playsinline controls preload="metadata" src="./static/videos/real/real_01.mp4"></video>
+                  <video id="real-feature" class="deployment-feature-video" muted loop playsinline controls preload="metadata" src="./static/videos/real/open-loop/real_02.mp4"></video>
                 </div>
                 <div class="deployment-thumb-strip" aria-label="Real-world rollout selector">
-                  <button class="deployment-thumb is-active" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_01.mp4">
-                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_01.mp4"></video>
-                    <span>Apple</span>
-                  </button>
-                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_02.mp4">
-                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_02.mp4"></video>
+                  <button class="deployment-thumb is-active" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/open-loop/real_02.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/open-loop/real_02.mp4"></video>
                     <span>Cup</span>
                   </button>
-                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_03.mp4">
-                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_03.mp4"></video>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/open-loop/real_03.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/open-loop/real_03.mp4"></video>
                     <span>Hammer</span>
                   </button>
-                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_04.mp4">
-                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_04.mp4"></video>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/open-loop/real_01.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/open-loop/real_01.mp4"></video>
+                    <span>Apple</span>
+                  </button>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/open-loop/real_04.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/open-loop/real_04.mp4"></video>
                     <span>Sweep</span>
                   </button>
-                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_05.mp4">
-                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_05.mp4"></video>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/open-loop/real_05.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/open-loop/real_05.mp4"></video>
                     <span>Cube (on table)</span>
                   </button>
-                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_06.mp4">
-                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_06.mp4"></video>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/open-loop/real_06.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/open-loop/real_06.mp4"></video>
                     <span>Cube (in hand) 1</span>
                   </button>
-                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_07.mp4">
-                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_07.mp4"></video>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/open-loop/real_07.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/open-loop/real_07.mp4"></video>
                     <span>Cube (in hand) 2</span>
                   </button>
-                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/real_08.mp4">
-                    <video muted loop playsinline preload="metadata" src="./static/videos/real/real_08.mp4"></video>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/open-loop/real_08.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/open-loop/real_08.mp4"></video>
                     <span>Cube (in hand) 3</span>
+                  </button>
+                  <button class="deployment-thumb" type="button" data-feature-target="#real-feature" data-video-src="./static/videos/real/open-loop/real_09.mp4">
+                    <video muted loop playsinline preload="metadata" src="./static/videos/real/open-loop/real_09.mp4"></video>
+                    <span>Cube (small)</span>
                   </button>
                 </div>
               </section>

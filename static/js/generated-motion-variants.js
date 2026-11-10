@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
+  function updateCardAction(card) {
+    var button = card.querySelector('.motion-card-action');
+    if (!button) {
+      return;
+    }
+    var isActive = card.classList.contains('is-active');
+    button.setAttribute('aria-controls', card.dataset.motionTarget);
+    button.setAttribute('aria-expanded', String(isActive));
+  }
+
   function pausePanelVideos(panel) {
     panel.querySelectorAll('video').forEach(function (video) {
       video.pause();
@@ -33,6 +43,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     root.querySelectorAll('[data-motion-target]').forEach(function (button) {
       button.classList.toggle('is-active', button.dataset.motionTarget === targetId);
+      if (button.classList.contains('motion-card')) {
+        updateCardAction(button);
+      }
     });
 
     window.dispatchEvent(new Event('resize'));
@@ -111,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     gallery.querySelectorAll('.motion-card').forEach(function (card) {
+      updateCardAction(card);
       card.addEventListener('click', function () {
         if (card.classList.contains('is-hidden')) {
           return;
@@ -131,6 +145,11 @@ document.addEventListener('DOMContentLoaded', function () {
         var card = button.closest('.motion-card');
         if (card) {
           card.click();
+          var panel = document.getElementById(card.dataset.motionTarget);
+          if (panel) {
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            panel.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'start' });
+          }
         }
       });
     });
