@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>AdaDex: Rebuttal Materials</title>
+  <meta name="description" content="Additional videos for the AdaDex rebuttal.">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/media-theme.css">
+  <link rel="stylesheet" href="./static/css/adadex.css?v=closed-loop-bold-4">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    .rebuttal-header { padding-top: 2.5rem; padding-bottom: 0.5rem; }
+    .rebuttal-header .title { margin-bottom: 0.6rem; }
+    .back-link { margin-top: 1.2rem; }
+    .rebuttal-toc { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem 1.4rem; margin-top: 1.2rem; font-size: 0.98rem; }
+    .rebuttal-toc a { color: #4f46e5; }
+    .reviewer-tag { display: inline-block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.02em; color: #3730a3;
+      background: #eef2ff; border-radius: 999px; padding: 0.15rem 0.7rem; margin-bottom: 0.6rem; }
+    .rb-subtitle { font-size: 1.35rem; font-weight: 600; margin: 2.2rem 0 0.4rem; }
+    .rb-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; margin-top: 1rem; }
+    .rb-grid.one { grid-template-columns: minmax(0, 1fr); }
+    .rb-card { background: #fff; border: 1px solid #e3e6ec; border-radius: 12px; padding: 0.9rem; }
+    .rb-card h4 { font-size: 1.05rem; font-weight: 600; margin: 0 0 0.25rem; }
+    .rb-card p { font-size: 0.93rem; color: #4b5563; margin: 0 0 0.6rem; }
+    .rb-card video { width: 100%; display: block; border-radius: 8px; background: #111922; }
+    .legend-lr { font-size: 0.95rem; color: #374151; margin-top: 0.4rem; }
+    .rb-note { font-size: 0.88rem; color: #6b7280; margin-top: 1rem; text-align: center; }
+    @media screen and (max-width: 768px) { .rb-grid { grid-template-columns: minmax(0, 1fr); } }
+  </style>
+</head>
+
+<body class="site-media">
+  <section class="hero rebuttal-header">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-2 publication-title">AdaDex: Rebuttal Materials</h1>
+        <div class="is-size-5 publication-authors">
+          <span class="author-block" style="font-style: italic;">Anonymous submission &middot; under double-blind review</span>
+        </div>
+        <div class="back-link">
+          <a href="./" class="button is-normal is-rounded is-dark">
+            <span class="icon"><i class="fas fa-arrow-left" aria-hidden="true"></i></span>
+            <span>Back to project page</span>
+          </a>
+        </div>
+        <nav class="rebuttal-toc" aria-label="Rebuttal sections">
+          <a href="#closed-loop">Closed-loop real-world rollouts</a>
+          <a href="#goal-sampling">Reference-plus-noise vs. random goals</a>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Closed-loop real-world ===================== -->
+  <section class="section" id="closed-loop">
+    <div class="container is-max-desktop">
+      <div style="text-align: center;">
+        <h2 class="title is-3 section-title-accent">Closed-Loop Real-World Rollouts</h2>
+      </div>
+      <p class="subsection-description">
+        In addition to the open-loop rollouts on the project page, we run the policy <strong>closed-loop</strong> on the
+        real arm-hand system at <strong>1x speed (30 Hz)</strong>. Videos are played at 1x. Background regions are blurred for
+        anonymity.
+      </p>
+      <div class="rb-grid">
+        <div class="rb-card">
+          <h4>Cup &middot; pour (closed-loop)</h4>
+          <video muted loop playsinline controls autoplay preload="metadata" src="./static/videos/real/closed-loop/cup.mp4"></video>
+        </div>
+        <div class="rb-card">
+          <h4>Hammer &middot; use (closed-loop)</h4>
+          <video muted loop playsinline controls autoplay preload="metadata" src="./static/videos/real/closed-loop/hammer.mp4"></video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Goal sampling ===================== -->
+  <section class="section" id="goal-sampling">
+    <div class="container is-max-desktop">
+      <div style="text-align: center;">
+        <h2 class="title is-3 section-title-accent">Reference-plus-Noise vs. Random Goals</h2>
+      </div>
+      <p class="subsection-description">
+        Both policies combine motion tracking with goal-reaching training (50/50 TrackEnv/GenEnv). They differ only in how
+        goals are sampled in the goal-reaching environments.
+      </p>
+      <p class="legend-lr has-text-centered">
+        <strong>Left &mdash; Reference-plus-noise (AdaDex):</strong> goals are sampled by perturbing future poses from the demonstration.<br>
+        <strong>Right &mdash; Random goals:</strong> object goals are sampled independently of the demonstrated trajectory.
+      </p>
+
+      <h3 class="rb-subtitle" id="native">Each policy with its native training goal sampler</h3>
+      <p class="subsection-description">
+        Each policy receives the type of goals used during its training. The left follows perturbed demonstration goals;
+        the right follows independently sampled random goals. This shows the behavior each training objective encourages.
+      </p>
+      <div class="rb-grid one">
+        <div class="rb-card">
+          <h4>AprilCube</h4>
+          <video muted loop playsinline controls preload="metadata" src="./static/videos/rebuttal/aprilcube_own_goals.mp4"></video>
+        </div>
+        <div class="rb-card">
+          <h4>Marker</h4>
+          <video muted loop playsinline controls preload="metadata" src="./static/videos/rebuttal/marker420_own_goals.mp4"></video>
+        </div>
+        <div class="rb-card">
+          <h4>Pen</h4>
+          <video muted loop playsinline controls preload="metadata" src="./static/videos/rebuttal/pen_own_goals.mp4"></video>
+        </div>
+      </div>
+
+      <h3 class="rb-subtitle" id="matched">Same test commands</h3>
+      <p class="subsection-description">
+        Both policies receive the same goal sequence, with matched Stage-2 iteration counts. These examples examine how the
+        two training approaches retain and extend the demonstrated manipulation skills.
+      </p>
+      <div class="rb-grid one">
+        <div class="rb-card">
+          <h4>AprilCube</h4>
+          <p>The same goal sequence asks both policies to perform two consecutive in-hand rotations.</p>
+          <video muted loop playsinline controls preload="metadata" src="./static/videos/rebuttal/aprilcube_comparison.mp4"></video>
+        </div>
+        <div class="rb-card">
+          <h4>Marker</h4>
+          <p>The same noisy-reference goal sequence is given to both policies.</p>
+          <video muted loop playsinline controls preload="metadata" src="./static/videos/rebuttal/marker420_comparison.mp4"></video>
+        </div>
+        <div class="rb-card">
+          <h4>Pen</h4>
+          <p>The same noisy-reference goal sequence is given to both policies.</p>
+          <video muted loop playsinline controls preload="metadata" src="./static/videos/rebuttal/pen_comparison.mp4"></video>
+        </div>
+      </div>
+      <p class="rb-note">
+        These are selected qualitative examples, not a random sample of all benchmark outcomes. Some paired videos hold the
+        final frame when one rollout ends earlier.
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p><a href="./">Back to the AdaDex project page</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
